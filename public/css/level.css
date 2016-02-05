@@ -1,0 +1,45 @@
+.captionWrapper {
+	display: block;
+	width: 600px;
+	margin: 0px auto;
+	border: 3px solid #33cccc;
+}
+
+.image {
+	display: block;
+	width: 500px;
+	height: 500px;
+	margin: 0px auto;
+	margin-top: 30px;
+	border: 5px dashed #cccccc;
+}
+
+.caption {
+	display: block;
+	width: 500px;
+	margin: 0px auto;
+	margin-top: 20px;
+}
+
+.upload {
+	display: block;
+	width: 200px;
+	height: 50px;
+	margin: 0px auto;
+	background-color: #33cccc;
+	color: #fff;
+	font-size: 20px;
+	margin-top: 200px;
+}
+
+.submitButton {
+	display: block;
+	width: 500px;
+	height: 50px;
+	margin: 0px auto;
+	background-color: #33cccc;
+	color: #fff;
+	font-size: 20px;
+	margin-top: 50px;
+	margin-bottom: 20px;
+}

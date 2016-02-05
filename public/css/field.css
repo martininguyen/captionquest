@@ -1,0 +1,14 @@
+.level {
+	display: block;
+	width: 75px;
+	height: 75px;
+	border-radius: 50%;
+	background-color: #33cccc;
+	color: #fff;
+	text-align: center;
+	line-height: 75px;
+}
+
+.level:hover {
+	background-color: #1f7a7a;
+}

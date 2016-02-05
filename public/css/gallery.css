@@ -1,0 +1,39 @@
+.captionWrapper {
+	display: block;
+	width: 600px;
+	margin: 0px auto;
+	border: 3px solid #33cccc;
+}
+
+.captionWrapper + .captionWrapper {
+	margin-top: 30px;
+}
+
+.image {
+	display: block;
+	width: 500px;
+	height: 500px;
+	margin: 0px auto;
+	margin-top: 30px;
+	border: 2px solid #cccccc;
+}
+
+.caption {
+	display: block;
+	width: 500px;
+	margin: 0px auto;
+	margin-top: 20px;
+}
+
+.fa-heart {
+	font-size: 20px;
+}
+
+.kudos {
+	display: block;
+	width: 500px;
+	margin: 0px auto;
+	font-size: 20px;
+	font-weight: 700;
+	margin-top: 10px;
+}

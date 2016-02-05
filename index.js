@@ -53,6 +53,14 @@ app.get('/field', function(request, response) {
 	response.render('field');
 });
 
+app.get('/level', function(req, res) {
+  res.render('level');
+});
+
+app.get('/signup', function(req, res) {
+  res.render('signup');
+});
+
 app.get('/login', function(req, res) {
  /* var result = authorize(req.username, req.password);
     if(result == true) {
