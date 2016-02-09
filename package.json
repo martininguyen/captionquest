@@ -18,6 +18,9 @@
     "type": "git",
     "url": "https://github.com/heroku/node-js-getting-started.git"
   },
+  "scripts": {
+      "start" : "node index"
+  },
   "author": "",
   "license": "ISC",
   "bugs": {
