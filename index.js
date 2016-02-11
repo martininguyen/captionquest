@@ -29,7 +29,7 @@ function authorize(username, password) {
   //return true, false;
 }
 app.get('/', function(request, response) {
-  response.render('index');
+  response.render('index', {layout:'index'});
   // var result = ''
   // var times = process.env.TIMES || 5
   // for (i=0; i < times; i++)
@@ -50,7 +50,15 @@ app.get('/shop', function(request, response) {
 });
 
 app.get('/field', function(request, response) {
-	response.render('field');
+	response.render('field', {layout:'fieldmaster'});
+});
+
+app.get('/field2', function(request, response) {
+	response.render('field2', {layout:'fieldmaster'});
+});
+
+app.get('/field3', function(request, response) {
+	response.render('field3', {layout:'fieldmaster'});
 });
 
 app.get('/level', function(req, res) {
