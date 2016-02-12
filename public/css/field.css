@@ -1,12 +1,12 @@
 .level {
 	display: block;
-	width: 75px;
-	height: 75px;
+	width: 100px;
+	height: 60px;
 	border-radius: 50%;
 	background-color: #33cccc;
 	color: #fff;
 	text-align: center;
-	line-height: 75px;
+	line-height: 60px;
 }
 
 .level:hover {
