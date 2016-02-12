@@ -1,13 +1,11 @@
 .captionWrapper {
 	display: block;
-	width: 90%;
 	margin: 0px auto;
-	border: 3px solid #33cccc;
 }
 
 .image {
 	display: block;
-	width: 80%;
+	width: 100%;
 	margin: 0px auto;
 	margin-top: 30px;
 	border: 5px dashed #cccccc;
@@ -33,7 +31,7 @@
 
 .submitButton {
 	display: block;
-	width: 80%;
+	width: 100%;
 	height: 50px;
 	margin: 0px auto;
 	background-color: #33cccc;
