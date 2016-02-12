@@ -1,0 +1,76 @@
+{
+  "submissions": [
+    {
+      "id": 1,
+      "url": "http://lorempixel.com/400/200/animals/",
+      "caption": "I need a six month holiday, twice a year.",
+      "cookies": 15
+    },
+    {
+      "id": 2,
+      "url": "http://lorempixel.com/400/200/animals/",
+      "caption": "When I feel a little down, I put on my favorite high heels and dance!",
+      "cookies": 14
+    },
+    {
+      "id": 3,
+      "url": "http://lorempixel.com/400/200/cats/",
+      "caption": "Hey, I just met you, this is crazy",
+      "cookies": 17
+    },
+    {
+      "id": 4,
+      "url": "http://lorempixel.com/400/200/animals/",
+      "caption": "I must destroy you with hugs and kisses",
+      "cookies": 20
+    },
+    {
+      "id": 5,
+      "url": "http://lorempixel.com/400/200/cats/",
+      "caption": "I woke up like this",
+      "cookies": 38
+    },
+    {
+      "id": 6,
+      "url": "http://lorempixel.com/400/200/animals/",
+      "caption": "I will eat just one, I swear",
+      "cookies": 98
+    },
+    {
+      "id": 7,
+      "url": "http://lorempixel.com/400/200/cats/",
+      "caption": "I liked memes before they were on Instagram",
+      "cookies": 3
+    },
+    {
+      "id": 8,
+      "url": "http://lorempixel.com/400/200/cats/",
+      "caption": "If we could only turn back time…",
+      "cookies": 6
+    },
+    {
+      "id": 9,
+      "url": "http://i.telegraph.co.uk/multimedia/archive/03497/comedy-hamster_3497562b.jpg",
+      "caption": "At dawn, we ride",
+      "cookies": 173
+    },
+    {
+      "id": 10,
+      "url": "http://lorempixel.com/400/200/cats/",
+      "caption": "This seat is taken",
+      "cookies": 34
+    },
+    {
+      "id": 11,
+      "url": "http://lorempixel.com/400/200/animals/",
+      "caption": "I wasn’t lucky, I deserved it",
+      "cookies": 44
+    },
+    {
+      "id": 12,
+      "url": "http://lorempixel.com/400/200/cats/",
+      "caption": "There may be no excuse for laziness, but I’m still looking.",
+      "cookies": 63
+    }
+  ]
+}

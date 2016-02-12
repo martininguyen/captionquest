@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="css/submission.css">
+	</head>
+	<body>
+		<h1>Take some time to look at other submissions.</h1>
+		<a href="/level">Ready to submit your own? Go back!</a>
+		{{#each submissions}}
+		<div class="captionWrapper" id="{{id}}">
+			<div class="image">
+				<img src="{{url}}"/>
+			</div>
+			<div class="caption">
+				{{caption}}
+			</div>
+			<div class="kudos">
+				<i class="fa fa-heart"></i><span class="cookies" id="c{{id}}">{{cookies}}</span> cookies
+			</div>
+			<button class="cookieButton" id="cookie{{id}}">Give Cookies</button>
+		</div>
+		{{/each}}
+		<script src="js/jquery.js"></script>
+		<script src="js/submission.js"></script>
+	</body>
+</html>

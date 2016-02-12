@@ -9,6 +9,8 @@
 	margin: 0px auto;
 	margin-top: 30px;
 	border: 5px dashed #cccccc;
+	background-size: 100%;
+	background-repeat: no-repeat;
 }
 
 .caption {
@@ -39,4 +41,9 @@
 	font-size: 20px;
 	margin-top: 50px;
 	margin-bottom: 20px;
+}
+
+.caption {
+	width: 100%;
+	height: 50px;
 }

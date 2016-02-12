@@ -4,6 +4,7 @@ var cool = require('cool-ascii-faces');
 var pg = require('pg');
 var handlebars = require('express3-handlebars');
 var path = require('path');
+var data = require('./data.json');
 app.set('port', (process.env.PORT || 5000));
 app.use(express.static(__dirname + '/public'));
 app.set('views', path.join(__dirname, 'views'));
@@ -38,7 +39,7 @@ app.get('/', function(request, response) {
 });
 
 app.get('/gallery', function(request, response) {
-	response.render('gallery');
+	response.render('gallery', data);
 });
 
 app.get('/home', function(request, response) {
@@ -82,6 +83,19 @@ app.get('/login', function(req, res) {
     }*/
 });
 
+app.get('/help', function(req, res) {
+  res.render('help');
+});
+app.get('/submission', function(req, res) {
+  console.log(req.query);
+  var imageURL = "http://placehold.it/500x500";
+  var caption = req.query.caption;
+  var cookies = 0;
+  var id = 100;
+  var newSubmission = {"url": imageURL, "caption": caption, "cookies": cookies, "id": id};
+  data["submissions"].push(newSubmission);
+  res.render('submission', data);
+});
 app.listen(app.get('port'), function() {
   console.log("Node app is running at localhost:" + app.get('port'));
 });

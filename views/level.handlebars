@@ -5,16 +5,17 @@
 	</head>
 	<body>
 		<a href="/field"> << Back to the field </a>
+		<form method="get" action="/submission">
 		<div class="captionWrapper">
 			<div id="imageWrapper">
-				<input type="file" id="fileUpload">
-				<button class="upload">Upload <i class="fa fa-camera"></i></button>
+				<input type="file" id="fileUpload" name="fileUpload">
+				<!--<button class="upload">Upload <i class="fa fa-camera"></i></button>-->
 			</div>
-			<div class="caption">
-				"Because everything's better with your #besties! #sincedayone #tbt"
-			</div>
-			<button class="submitButton">Submit</button>
+				<textarea readonly class="caption" id="caption" name="caption">"Because everything's better with your #besties! #sincedayone #tbt"</textarea>
+			<input type="submit" class="submitButton" value="Submit">
 		</div>
+	</form>
+		<a href="/submission">Need some inspiration? Check out other works!</a>
 		<script src="js/jquery.js"></script>
 		<script src="js/level.js"></script>
 	</body>

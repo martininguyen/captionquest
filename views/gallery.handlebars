@@ -5,76 +5,18 @@
 	</head>
 	<body>
 		<h1>Welcome to your gallery!</h1>
-		<div class="captionWrapper">
+		{{#each submissions}}
+		<div class="captionWrapper" id="{{id}}">
 			<div class="image">
-				<img src="http://placekitten.com/g/500/500"/>
+				<img src="{{url}}"/>
 			</div>
 			<div class="caption">
-				"Because everything's better with your #besties! #sincedayone #tbt"
+				{{caption}}
 			</div>
 			<div class="kudos">
-				<i class="fa fa-heart"></i>15 kudos
+				<i class="fa fa-heart"></i>{{cookies}} cookies
 			</div>
 		</div>
-
-		<div class="captionWrapper">
-			<div class="image">
-				<img src="http://placekitten.com/g/500/500"/>
-			</div>
-			<div class="caption">
-				"Because everything's better with your #besties! #sincedayone #tbt"
-			</div>
-			<div class="kudos">
-				<i class="fa fa-heart"></i>15 kudos
-			</div>
-		</div>
-
-		<div class="captionWrapper">
-			<div class="image">
-				<img src="http://placekitten.com/g/500/500"/>
-			</div>
-			<div class="caption">
-				"Because everything's better with your #besties! #sincedayone #tbt"
-			</div>
-			<div class="kudos">
-				<i class="fa fa-heart"></i>15 kudos
-			</div>
-		</div>
-
-		<div class="captionWrapper">
-			<div class="image">
-				<img src="http://placekitten.com/g/500/500"/>
-			</div>
-			<div class="caption">
-				"Because everything's better with your #besties! #sincedayone #tbt"
-			</div>
-			<div class="kudos">
-				<i class="fa fa-heart"></i>15 kudos
-			</div>
-		</div>
-
-		<div class="captionWrapper">
-			<div class="image">
-				<img src="http://placekitten.com/g/500/500"/>
-			</div>
-			<div class="caption">
-				"Because everything's better with your #besties! #sincedayone #tbt"
-			</div>
-			<div class="kudos">
-				<i class="fa fa-heart"></i>15 kudos
-			</div>
-		</div>
-
-		<div class="captionWrapper">
-			<div class="image">
-				<img src="http://placekitten.com/g/500/500"/>
-			</div>
-			<div class="caption">
-				"Because everything's better with your #besties! #sincedayone #tbt"
-			</div>
-			<div class="kudos">
-				<i class="fa fa-heart"></i>15 kudos
-			</div>
-		</div>
+		{{/each}}
 	</body>
 </html>
