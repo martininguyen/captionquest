@@ -5,6 +5,7 @@
 	</head>
 	<body>
 		<h1>Welcome to the shop!</h1>
+		<h3>Cookies: <span id="numcookies">1000</span></h3>
 		<div class="content">
 			{{#each pets}}
 			<div class="product">
@@ -33,7 +34,7 @@
 				      </div>
 				      <div class="modal-footer">
 				        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				        <button type="button" class="btn btn-primary" onclick="buy('{{name}}')">Buy</button>
+				        <button type="button" id="pet{{name}}" class="btn btn-primary" onclick="buy('{{name}}', '{{price}}')">Buy</button>
 				      </div>
 				    </div>
 				  </div>

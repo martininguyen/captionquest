@@ -32,10 +32,28 @@
 				<div class="content">
 					<ul>
 						<li><a href="/addPets" class="btn btn-default" >Add Pets</a></li>
-						<li><a href="#" class="btn btn-default" >Pet Book</a></li>
 						<li><a href="/gallery" class="btn btn-default">Gallery</a></li>
+						<li><button class="btn btn-default" data-toggle="modal" data-target="#tutorial" onclick="tutorial()">Tutorial</a></li>
 					</ul>
 				</div>
+			</div>
+
+			<div class="modal fade" id="tutorial" tabindex="-1" role="dialog" aria-labelledby="Tutorial">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			        <h4 class="modal-title" id="myModalLabel">Tutorial Mode</h4>
+			      </div>
+			      <div class="modal-body">
+			        Would you like to go through the tutorial?
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-default" data-dismiss="modal" id="quit">No</button>
+			        <button type="button" class="btn btn-primary" id="cont" onclick="tutorial()">Yes</button>
+			      </div>
+			    </div>
+			  </div>
 			</div>
 			<div class="square">
 				<div class="content">
@@ -55,5 +73,6 @@
 
 		</div>
 	</div>
+	<script src="js/jquery.js"></script>
 	<script src="js/home.js"></script>
 </html>

@@ -1,34 +1,6 @@
 {
 	"pets": [
 		{
-			"name": "Banurna",
-			"picture": "./img/pet/pet8_banurna1.png",
-			"description": "High in potassium and Vitamin A-dorable!",
-			"price": "100",
-			"id": "banurna"
-		},
-		{
-			"name": "Berluun",
-			"picture": "./img/pet/pet8_berluun1.png",
-			"description": "So cute you wouldn't want to let him go!",
-			"price": "200",
-			"id": "berluun"
-		},
-		{
-			"name": "Blerb",
-			"picture": "./img/pet/pet8_blerb1.png",
-			"description": "The very embodiment of how you are feeling at any given moment",
-			"price": "100",
-			"id": "blerb"
-		},
-		{
-			"name": "Flern",
-			"picture": "./img/pet/pet8_flern1.png",
-			"description": "The sweetest of all pets!",
-			"price": "100",
-			"id": "flern"
-		},
-		{
 			"name": "Flertz",
 			"picture": "./img/pet/pet8_flertz1.png",
 			"description": "Not too sure what she's supposed to be, but cute nonetheless!",

@@ -12,80 +12,47 @@
 
     <!-- Custom CSS -->
     <link href="css/portfolio-item.css" rel="stylesheet">
+    <link href="css/addPets.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
-
-    <!-- Page Content -->
-    <div class="container">
-		
-		
-		
-		<!-- Pet Header -->
-        <div class="row">
-            <div class="col-lg-12">
-                <h1 class="page-header">Welcome to the your Pets Page!
-                </h1>
+<div class="content">
+        <h1>Here are your pets!</h1>
+            {{#each pets}}
+            <div class="product">
+                <div class="image">
+                    <img src="{{picture}}"/>
+                </div>
+                <div class="name">
+                    {{name}}
+                </div>
+                <div class="price">
+                    {{price}}
+                </div>
+                <button class="buy" data-toggle="modal" data-target="#{{id}}">Place</button>
+                <div class="modal fade" id="{{id}}" tabindex="-1" role="dialog" aria-labelledby="{{name}}">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">{{name}}</h4>
+                      </div>
+                      <div class="modal-body">
+                        <img class="modalPicture" src="{{picture}}">
+                        <div class="modalDescription" id="description{{name}}">
+                            {{description}}
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <a href="/selectArea"><button type="button" class="btn btn-primary">Place</button></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
             </div>
+            {{/each}}
         </div>
-        <!-- /.row -->
-		
-		<!-- Pet Description -->
-        <div class="row">
-
-            <div class="col-md-8">
-                <img class="img-responsive" src="img/pet/pet_flern_1.png" alt="">
-            </div>
-
-            <div class="col-md-4">
-				<h3>Pet Description</h3>
-				<p> The flernist pet you could ever have! </p>
-				<h3>Details</h3>
-                <ul>
-                    <li>Likes Cherry Head Rubs</li>
-                    <li>Derps Around</li>
-                    <li>Super Swag Pet</li>
-                </ul>
-				<a href="/selectArea" class="btn btn-default">Add Pet To Home</a>
-            </div>
-
-        </div>
-        <!-- /.row -->
-		
-		<!-- Pets -->
-        <div class="row">
-
-            <div class="col-lg-12">
-                <h3 class="page-header">Choose Pet To Add</h3>
-            </div>
-
-            <div class="col-sm-3 col-xs-6">
-                <a href="#">
-                    <img class="img-responsive portfolio-item" src="img/pet/pet_berluun_1.png" alt="">
-                </a>
-            </div>
-
-            <div class="col-sm-3 col-xs-6">
-                <a href="#">
-                    <img class="img-responsive portfolio-item" src="img/pet/pet_blerb_1.png" alt="">
-                </a>
-            </div>
-
-            <div class="col-sm-3 col-xs-6">
-                <a href="#">
-                    <img class="img-responsive portfolio-item" src="img/pet/pet_bunurna_1.png" alt="">
-                </a>
-            </div>
-
-
-        </div>
-        <!-- /.row -->
-
-      
-	
-      
-    </div>
-    <!-- /.container -->
 	
 	
     <!-- jQuery -->

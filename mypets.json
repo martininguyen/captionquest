@@ -1,0 +1,40 @@
+{
+	"pets": [
+		{
+			"name": "Banurna",
+			"picture": "./img/pet/pet8_banurna1.png",
+			"description": "High in potassium and Vitamin A-dorable!",
+			"id": "banurna",
+			"detail1": "Likes cherry head rubs",
+			"detail2": "Derps around",
+			"detail3": "Super swag pet"
+		},
+		{
+			"name": "Berluun",
+			"picture": "./img/pet/pet8_berluun1.png",
+			"description": "So cute you wouldn't want to let him go!",
+			"id": "berluun",
+			"detail1": "Likes cherry head rubs",
+			"detail2": "Derps around",
+			"detail3": "Super swag pet"
+		},
+		{
+			"name": "Blerb",
+			"picture": "./img/pet/pet8_blerb1.png",
+			"description": "The very embodiment of how you are feeling at any given moment",
+			"id": "blerb",
+			"detail1": "Likes cherry head rubs",
+			"detail2": "Derps around",
+			"detail3": "Super swag pet"
+		},
+		{
+			"name": "Flern",
+			"picture": "./img/pet/pet8_flern1.png",
+			"description": "The sweetest of all pets!",
+			"id": "flern",
+			"detail1": "Likes cherry head rubs",
+			"detail2": "Derps around",
+			"detail3": "Super swag pet"
+		}
+	]
+}

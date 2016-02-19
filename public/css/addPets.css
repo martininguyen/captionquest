@@ -1,0 +1,53 @@
+.content {
+	display: block;
+	width: 400px;
+	margin: 0px auto;
+}
+
+.product {
+	display: inline-block;
+	width: 150px;
+	border: 2px solid #33cccc;
+	margin-top: 15px;
+}
+
+.product .image {
+	display: block;
+	width: 100px;
+	margin: 0px auto;
+	margin-top: 10px;
+}
+
+.product .image img{
+	width: 100px;
+}
+
+.product .price, .product .name {
+	display: block;
+	width: 100px;
+	margin: 0px auto;
+	text-align: center;
+}
+
+.product:nth-child(even) {
+	margin-left: 25px;
+}
+
+.buy {
+	display: block;
+	width: 100px;
+	margin: 0px auto;
+	background-color: #33cccc;
+	color: #fff;
+	margin-bottom: 10px;
+}
+
+.modalPicture {
+	width: 30%;
+	display: inline-block;
+}
+
+.modalDescription {
+	width: 50%;
+	display: inline-block;
+}

@@ -6,6 +6,7 @@ var handlebars = require('express3-handlebars');
 var path = require('path');
 var data = require('./data.json');
 var storepets = require('./storepets.json');
+var mypets = require('./mypets.json');
 app.set('port', (process.env.PORT || 5000));
 app.use(express.static(__dirname + '/public'));
 app.set('views', path.join(__dirname, 'views'));
@@ -48,7 +49,7 @@ app.get('/home', function(request, response) {
 });
 
 app.get('/addPets', function(request, response) {
-	response.render('addPets');
+	response.render('addPets', mypets);
 });
 
 app.get('/selectArea', function(request, response) {
@@ -96,13 +97,12 @@ app.get('/help', function(req, res) {
   res.render('help');
 });
 app.get('/submission', function(req, res) {
-  console.log(req.query);
   var imageURL = "http://placehold.it/500x500";
   var caption = req.query.caption;
   var cookies = 0;
   var id = 100;
   var newSubmission = {"url": imageURL, "caption": caption, "cookies": cookies, "id": id};
-  data["submissions"].push(newSubmission);
+  data["submissions"].unshift(newSubmission);
   res.render('submission', data);
 });
 app.listen(app.get('port'), function() {
