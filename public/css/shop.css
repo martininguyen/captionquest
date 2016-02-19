@@ -18,12 +18,17 @@
 	margin-top: 10px;
 }
 
-.product .price {
+.product .image img{
+	width: 100px;
+}
+
+.product .price, .product .name {
 	display: block;
 	width: 100px;
 	margin: 0px auto;
 	text-align: center;
 }
+
 .product:nth-child(even) {
 	margin-left: 25px;
 }
@@ -35,4 +40,14 @@
 	background-color: #33cccc;
 	color: #fff;
 	margin-bottom: 10px;
+}
+
+.modalPicture {
+	width: 30%;
+	display: inline-block;
+}
+
+.modalDescription {
+	width: 50%;
+	display: inline-block;
 }
