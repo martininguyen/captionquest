@@ -1,14 +1,30 @@
 .level {
 	display: block;
-	width: 100px;
-	height: 60px;
+	width: 75px;
+	height: 75px;
 	border-radius: 50%;
 	background-color: #33cccc;
 	color: #fff;
 	text-align: center;
-	line-height: 60px;
+	line-height: 75px;
 }
 
 .level:hover {
 	background-color: #1f7a7a;
+}
+
+.square {
+    float:left;
+    position: relative;
+    width: 20%;
+    padding-bottom: 20%; /* = width for a 1:1 aspect ratio */
+    margin:0%;
+    overflow:hidden;
+}
+
+.content {
+    position:absolute;
+    height:80%; /* = 100% - 2*10% padding */
+    width:90%; /* = 100% - 2*5% padding */
+    padding: 10% 5%;
 }
