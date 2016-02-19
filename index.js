@@ -46,6 +46,14 @@ app.get('/home', function(request, response) {
 	response.render('home');
 });
 
+app.get('/addPets', function(request, response) {
+	response.render('addPets');
+});
+
+app.get('/selectArea', function(request, response) {
+	response.render('selectArea');
+});
+
 app.get('/shop', function(request, response) {
 	response.render('shop');
 });
