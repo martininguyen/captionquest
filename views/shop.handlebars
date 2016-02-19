@@ -6,78 +6,40 @@
 	<body>
 		<h1>Welcome to the shop!</h1>
 		<div class="content">
+			{{#each pets}}
 			<div class="product">
 				<div class="image">
-					<img src="http://placehold.it/100x100"/>
+					<img src="{{picture}}"/>
+				</div>
+				<div class="name">
+					{{name}}
 				</div>
 				<div class="price">
-					50 coins
+					{{price}}
 				</div>
-				<button class="buy">Buy</button>
+				<button class="buy" data-toggle="modal" data-target="#{{id}}">Buy</button>
+				<div class="modal fade" id="{{id}}" tabindex="-1" role="dialog" aria-labelledby="{{name}}">
+				  <div class="modal-dialog" role="document">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				        <h4 class="modal-title" id="myModalLabel">{{name}}</h4>
+				      </div>
+				      <div class="modal-body">
+				      	<img class="modalPicture" src="{{picture}}">
+				      	<div class="modalDescription">{{description}}</div>
+
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				        <button type="button" class="btn btn-primary">Save changes</button>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+
 			</div>
-						<div class="product">
-				<div class="image">
-					<img src="http://placehold.it/100x100"/>
-				</div>
-				<div class="price">
-					50 coins
-				</div>
-				<button class="buy">Buy</button>
-			</div>
-						<div class="product">
-				<div class="image">
-					<img src="http://placehold.it/100x100"/>
-				</div>
-				<div class="price">
-					50 coins
-				</div>
-				<button class="buy">Buy</button>
-			</div>
-						<div class="product">
-				<div class="image">
-					<img src="http://placehold.it/100x100"/>
-				</div>
-				<div class="price">
-					50 coins
-				</div>
-				<button class="buy">Buy</button>
-			</div>
-						<div class="product">
-				<div class="image">
-					<img src="http://placehold.it/100x100"/>
-				</div>
-				<div class="price">
-					50 coins
-				</div>
-				<button class="buy">Buy</button>
-			</div>
-						<div class="product">
-				<div class="image">
-					<img src="http://placehold.it/100x100"/>
-				</div>
-				<div class="price">
-					50 coins
-				</div>
-				<button class="buy">Buy</button>
-			</div>
-						<div class="product">
-				<div class="image">
-					<img src="http://placehold.it/100x100"/>
-				</div>
-				<div class="price">
-					50 coins
-				</div>
-				<button class="buy">Buy</button>
-			</div>
-						<div class="product">
-				<div class="image">
-					<img src="http://placehold.it/100x100"/>
-				</div>
-				<div class="price">
-					50 coins
-				</div>
-				<button class="buy">Buy</button>
-			</div>
+			{{/each}}
 		</div>
 	</body>
 </html>

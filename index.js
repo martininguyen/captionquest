@@ -5,6 +5,7 @@ var pg = require('pg');
 var handlebars = require('express3-handlebars');
 var path = require('path');
 var data = require('./data.json');
+var storepets = require('./storepets.json');
 app.set('port', (process.env.PORT || 5000));
 app.use(express.static(__dirname + '/public'));
 app.set('views', path.join(__dirname, 'views'));
@@ -47,7 +48,7 @@ app.get('/home', function(request, response) {
 });
 
 app.get('/shop', function(request, response) {
-	response.render('shop');
+	response.render('shop', storepets);
 });
 
 app.get('/field', function(request, response) {
