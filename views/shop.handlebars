@@ -27,19 +27,20 @@
 				      </div>
 				      <div class="modal-body">
 				      	<img class="modalPicture" src="{{picture}}">
-				      	<div class="modalDescription">{{description}}</div>
-
+				      	<div class="modalDescription" id="description{{name}}">
+				      		{{description}}
+				      	</div>
 				      </div>
 				      <div class="modal-footer">
 				        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				        <button type="button" class="btn btn-primary">Save changes</button>
+				        <button type="button" class="btn btn-primary" onclick="buy('{{name}}')">Buy</button>
 				      </div>
 				    </div>
 				  </div>
 				</div>
-
 			</div>
 			{{/each}}
 		</div>
+		<script src="js/shop.js"></script>
 	</body>
 </html>
