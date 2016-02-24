@@ -7,13 +7,13 @@ var path = require('path');
 var data = require('./data.json');
 var storepets = require('./storepets.json');
 var mypets = require('./mypets.json');
-var login = require('./routes/login');
-var mongoose = require('mongoose'), Schema = mongoose.Schema;
+var mongoose = require('mongoose');
+var petSchema = mongoose.Schema;
 
 var userConn = mongoose.createConnection('mongodb://captionquest:potato@ds015398.mongolab.com:15398/cqusers');
 var submissionConn = mongoose.createConnection('mongodb://captionquest:potato@ds015478.mongolab.com:15478/cqsubmissions');
 
-var User = userConn.model('User', new Schema({
+var User = userConn.model('User', new petSchema({
   username: {type: String, required: true, index: {unique: true} },
   email: {type: String, required: true },
   password: {type: String, required: true },
@@ -50,16 +50,9 @@ app.engine('handlebars', handlebars({defaultLayout : 'master'}));
 app.set('view engine', 'handlebars');
 
 function authorize(username, password) {
-  //check with database
-  //return true, false;
 }
 app.get('/', function(request, response) {
   response.render('index', {layout:'index'});
-  // var result = ''
-  // var times = process.env.TIMES || 5
-  // for (i=0; i < times; i++)
-  //   result += cool();
-  // response.send(result);
 });
 
 app.get('/gallery', function(request, response) {
