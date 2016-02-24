@@ -73,9 +73,6 @@ app.get('/gallery', function(request, response) {
 });
 
 app.get('/home', function(request, response) {
-	if(!loggedIn){
-		return res.status(401).send();
-	}
 	response.render('home');
 });
 
