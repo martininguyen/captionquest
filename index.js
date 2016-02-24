@@ -1,18 +1,29 @@
 var express = require('express');
 var app = express();
+var router = express.Router();
 var cool = require('cool-ascii-faces');
-var pg = require('pg');
 var handlebars = require('express3-handlebars');
 var path = require('path');
 var data = require('./data.json');
 var storepets = require('./storepets.json');
 var mypets = require('./mypets.json');
 var mongoose = require('mongoose');
-var petSchema = mongoose.Schema;
+// var petSchema = mongoose.Schema;
 
 var userConn = mongoose.createConnection('mongodb://captionquest:potato@ds015398.mongolab.com:15398/cqusers');
 var submissionConn = mongoose.createConnection('mongodb://captionquest:potato@ds015478.mongolab.com:15478/cqsubmissions');
 
+var mSchema = new mongoose.Schema({
+	username: {type: String, unique: true},
+	password: {type: String, unique: true},
+	firstname: String,
+	lastname: String
+});
+
+var User = mongoose.model("myuser", mSchema);
+
+
+/*
 var User = userConn.model('User', new petSchema({
   username: {type: String, required: true, index: {unique: true} },
   email: {type: String, required: true },
@@ -26,6 +37,8 @@ var User = userConn.model('User', new petSchema({
   tutorialLevel: Boolean,
   tutorialSubmit: Boolean
 }));
+
+*/
 
 var jessica = new User({
   username: "linjasaur",
@@ -60,6 +73,9 @@ app.get('/gallery', function(request, response) {
 });
 
 app.get('/home', function(request, response) {
+	if(!loggedIn){
+		return res.status(401).send();
+	}
 	response.render('home');
 });
 
@@ -91,11 +107,53 @@ app.get('/level', function(req, res) {
   res.render('level');
 });
 
+/*
+router.post('/signup', function(req, res){
+	var username = req.body.username;
+	var password = req.body.password;
+	var firstname = req.body.firstname;
+	var lastname = req.body.lastname;
+	
+	var newuser = new User();
+	newuser.username = username;
+	newuser.password = password;
+	newuser.firstname = firstname;
+	newuser.lastname = lastname;
+	newuser.save(function(err, savedUser){
+		if(err){
+			console.log(err);
+			return res.status(500).send();
+		}
+		return res.status(200).send();
+	})
+}) */
+
 app.get('/signup', function(req, res) {
   res.render('signup');
 });
 
+/*
+router.post('/login', function(req, res){
+	var username = req.body.username;
+	var password = req.body.password;
+	
+	User.findOne({userName: username, password: password, function(err,user)
+		if(err){
+			console.log(err);
+			return res.status(500).send();
+		}
+		if(!user){
+			return res.status(404).send();
+		}
+		
+		return res.status(200).send();
+	})
+}); */
+
 app.get('/login', function(req, res) {
+	
+	
+/*
   User
     .find()
     .exec(theThing);
@@ -105,7 +163,7 @@ app.get('/login', function(req, res) {
     console.log(err);
   }
 
-  res.render('home');
+  res.render('home');*/
 });
 
 app.get('/help', function(req, res) {
