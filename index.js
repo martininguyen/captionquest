@@ -7,25 +7,47 @@ var path = require('path');
 var data = require('./data.json');
 var storepets = require('./storepets.json');
 var mypets = require('./mypets.json');
+var login = require('./routes/login');
+var mongoose = require('mongoose'), Schema = mongoose.Schema;
+
+var userConn = mongoose.createConnection('mongodb://captionquest:potato@ds015398.mongolab.com:15398/cqusers');
+var submissionConn = mongoose.createConnection('mongodb://captionquest:potato@ds015478.mongolab.com:15478/cqsubmissions');
+
+var User = userConn.model('User', new Schema({
+  username: {type: String, required: true, index: {unique: true} },
+  email: {type: String, required: true },
+  password: {type: String, required: true },
+  pets: [String],
+  locations: [String],
+  cookies: Number,
+  cookiesLeft: Number,
+  tutorial: Boolean,
+  tutorialField: Boolean,
+  tutorialLevel: Boolean,
+  tutorialSubmit: Boolean
+}));
+
+var jessica = new User({
+  username: "linjasaur",
+  email: "jess@ica.com",
+  password: "merp"
+});
+
+jessica.save(afterSaving);
+
+function afterSaving(err) {
+  if (err) {
+    console.log(err);
+  }
+}
+
 app.set('port', (process.env.PORT || 5000));
 app.use(express.static(__dirname + '/public'));
 app.set('views', path.join(__dirname, 'views'));
+
 //app.use(express.static(__dirname + '/public'));
 app.engine('handlebars', handlebars({defaultLayout : 'master'}));
 app.set('view engine', 'handlebars');
-
-app.get('/db', function (request, response) {
-  pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-    client.query('SELECT * FROM test_table', function(err, result) {
-      done();
-      if (err)
-       { console.error(err); response.send("Error " + err); }
-      else
-       { response.send(result.rows); }
-    });
-  });
-  response.send('heuheuheuheuehe');
-});
 
 function authorize(username, password) {
   //check with database
@@ -81,16 +103,16 @@ app.get('/signup', function(req, res) {
 });
 
 app.get('/login', function(req, res) {
- /* var result = authorize(req.username, req.password);
-    if(result == true) {
-      res.render('homepage', {
-        'validated': 'true'
-      })
-    } else {
-      res.render('homepage', {
-        'validated': 'false'
-      })
-    }*/
+  User
+    .find()
+    .exec(theThing);
+
+  function theThing(err) {
+    console.log("something happened");
+    console.log(err);
+  }
+
+  res.render('home');
 });
 
 app.get('/help', function(req, res) {
