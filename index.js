@@ -81,11 +81,11 @@ function isLoggedIn(req, res, next) {
 
     passport.use('local-signup', new LocalStrategy({
         // by default, local strategy uses username and password, we will override with email
-        usernameField : 'username',
+        usernameField : 'email',
         passwordField : 'password',
         passReqToCallback : true // allows us to pass back the entire request to the callback
     },
-    function(req, username, password, email, done) {
+    function(req, email, password, done) {
 
         // asynchronous
         // User.findOne wont fire unless data is sent back
@@ -93,7 +93,7 @@ function isLoggedIn(req, res, next) {
 
         // find a user whose email is the same as the forms email
         // we are checking to see if the user trying to login already exists
-        User.findOne({ 'local.username' :  username }, function(err, user) {
+        User.findOne({ 'local.email' :  email }, function(err, user) {
             // if there are any errors, return the error
             if (err)
                 return done(err);
@@ -108,7 +108,7 @@ function isLoggedIn(req, res, next) {
                 var newUser            = new User();
 
                 // set the user's local credentials
-				newUser.local.username = username;
+				newUser.local.username = req.body.username;
 				newUser.local.password = newUser.generateHash(password);
                 newUser.local.email    = email;
 
@@ -135,11 +135,11 @@ function isLoggedIn(req, res, next) {
 
     passport.use('local-login', new LocalStrategy({
         // by default, local strategy uses username and password, we will override with email
-        usernameField : 'username',
+        usernameField : 'email',
         passwordField : 'password',
         passReqToCallback : true // allows us to pass back the entire request to the callback
     },
-    function(req, username, password, done) { // callback with email and password from our form
+    function(req, email, password, done) { // callback with email and password from our form
 
         // find a user whose email is the same as the forms email
         // we are checking to see if the user trying to login already exists
