@@ -7,52 +7,23 @@ var path = require('path');
 var data = require('./data.json');
 var storepets = require('./storepets.json');
 var mypets = require('./mypets.json');
+
 var mongoose = require('mongoose');
-// var petSchema = mongoose.Schema;
+var passport = require('passport');
+var flash    = require('connect-flash');
 
-var userConn = mongoose.createConnection('mongodb://captionquest:potato@ds015398.mongolab.com:15398/cqusers');
-var submissionConn = mongoose.createConnection('mongodb://captionquest:potato@ds015478.mongolab.com:15478/cqsubmissions');
+var morgan       = require('morgan');
+var cookieParser = require('cookie-parser');
+var bodyParser   = require('body-parser');
+var session      = require('express-session');
 
-var mSchema = new mongoose.Schema({
-	username: {type: String, unique: true},
-	password: {type: String, unique: true},
-	firstname: String,
-	lastname: String
-});
+var db = require('./config/db');
 
-var User = mongoose.model("myuser", mSchema);
+var LocalStrategy   = require('passport-local').Strategy;
+var User            = require('./app/user');
 
+mongoose.connect(db.url);
 
-/*
-var User = userConn.model('User', new petSchema({
-  username: {type: String, required: true, index: {unique: true} },
-  email: {type: String, required: true },
-  password: {type: String, required: true },
-  pets: [String],
-  locations: [String],
-  cookies: Number,
-  cookiesLeft: Number,
-  tutorial: Boolean,
-  tutorialField: Boolean,
-  tutorialLevel: Boolean,
-  tutorialSubmit: Boolean
-}));
-
-*/
-
-var jessica = new User({
-  username: "linjasaur",
-  email: "jess@ica.com",
-  password: "merp"
-});
-
-jessica.save(afterSaving);
-
-function afterSaving(err) {
-  if (err) {
-    console.log(err);
-  }
-}
 
 app.set('port', (process.env.PORT || 5000));
 app.use(express.static(__dirname + '/public'));
@@ -62,11 +33,148 @@ app.set('views', path.join(__dirname, 'views'));
 app.engine('handlebars', handlebars({defaultLayout : 'master'}));
 app.set('view engine', 'handlebars');
 
-function authorize(username, password) {
+app.use(morgan('dev')); // log every request to the console
+app.use(cookieParser()); // read cookies (needed for auth)
+app.use(bodyParser()); // get information from html forms
+
+app.use(session({ secret: 'ilovescotchscotchyscotchscotch' })); // session secret
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
+app.use(flash()); // use connect-flash for flash messages stored in session
+
+
+// route middleware to make sure a user is logged in
+function isLoggedIn(req, res, next) {
+
+    // if user is authenticated in the session, carry on 
+    if (req.isAuthenticated())
+        return next();
+
+    // if they aren't redirect them to the home page
+    res.redirect('/');
 }
+
+
+// =========================================================================
+    // passport session setup ==================================================
+    // =========================================================================
+    // required for persistent login sessions
+    // passport needs ability to serialize and unserialize users out of session
+
+    // used to serialize the user for the session
+    passport.serializeUser(function(user, done) {
+        done(null, user.id);
+    });
+
+    // used to deserialize the user
+    passport.deserializeUser(function(id, done) {
+        User.findById(id, function(err, user) {
+            done(err, user);
+        });
+    });
+
+    // =========================================================================
+    // LOCAL SIGNUP ============================================================
+    // =========================================================================
+    // we are using named strategies since we have one for login and one for signup
+    // by default, if there was no name, it would just be called 'local'
+
+    passport.use('local-signup', new LocalStrategy({
+        // by default, local strategy uses username and password, we will override with email
+        usernameField : 'username',
+        passwordField : 'password',
+        passReqToCallback : true // allows us to pass back the entire request to the callback
+    },
+    function(req, username, password, email, done) {
+
+        // asynchronous
+        // User.findOne wont fire unless data is sent back
+        process.nextTick(function() {
+
+        // find a user whose email is the same as the forms email
+        // we are checking to see if the user trying to login already exists
+        User.findOne({ 'local.username' :  username }, function(err, user) {
+            // if there are any errors, return the error
+            if (err)
+                return done(err);
+
+            // check to see if theres already a user with that email
+            if (user) {
+                return done(null, false, req.flash('signupMessage', 'That user is already taken.'));
+            } else {
+
+                // if there is no user with that email
+                // create the user
+                var newUser            = new User();
+
+                // set the user's local credentials
+				newUser.local.username = username;
+				newUser.local.password = newUser.generateHash(password);
+                newUser.local.email    = email;
+
+                // save the user
+                newUser.save(function(err) {
+                    if (err)
+                        throw err;
+                    return done(null, newUser);
+                });
+            }
+
+        });    
+
+        });
+
+	}));
+	
+	
+	// =========================================================================
+    // LOCAL LOGIN =============================================================
+    // =========================================================================
+    // we are using named strategies since we have one for login and one for signup
+    // by default, if there was no name, it would just be called 'local'
+
+    passport.use('local-login', new LocalStrategy({
+        // by default, local strategy uses username and password, we will override with email
+        usernameField : 'username',
+        passwordField : 'password',
+        passReqToCallback : true // allows us to pass back the entire request to the callback
+    },
+    function(req, username, password, done) { // callback with email and password from our form
+
+        // find a user whose email is the same as the forms email
+        // we are checking to see if the user trying to login already exists
+        User.findOne({ 'local.username' :  username }, function(err, user) {
+            // if there are any errors, return the error before anything else
+            if (err)
+                return done(err);
+
+            // if no user is found, return the message
+            if (!user)
+                return done(null, false, req.flash('loginMessage', 'No user found.')); // req.flash is the way to set flashdata using connect-flash
+
+            // if the user is found but the password is wrong
+            if (!user.validPassword(password))
+                return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.')); // create the loginMessage and save it to session as flashdata
+
+            // all is well, return successful user
+            return done(null, user);
+        });
+
+    }));
+
+
+
 app.get('/', function(request, response) {
   response.render('index', {layout:'index'});
 });
+
+
+// process the login form
+app.post('/', passport.authenticate('local-login', {
+    successRedirect : '/home', // redirect to the secure profile section
+    failureRedirect : '/', // redirect back to the signup page if there is an error
+    failureFlash : true // allow flash messages
+}));
 
 app.get('/gallery', function(request, response) {
 	response.render('gallery', data);
@@ -104,64 +212,16 @@ app.get('/level', function(req, res) {
   res.render('level');
 });
 
-/*
-router.post('/signup', function(req, res){
-	var username = req.body.username;
-	var password = req.body.password;
-	var firstname = req.body.firstname;
-	var lastname = req.body.lastname;
-	
-	var newuser = new User();
-	newuser.username = username;
-	newuser.password = password;
-	newuser.firstname = firstname;
-	newuser.lastname = lastname;
-	newuser.save(function(err, savedUser){
-		if(err){
-			console.log(err);
-			return res.status(500).send();
-		}
-		return res.status(200).send();
-	})
-}) */
-
 app.get('/signup', function(req, res) {
   res.render('signup');
 });
 
-/*
-router.post('/login', function(req, res){
-	var username = req.body.username;
-	var password = req.body.password;
-	
-	User.findOne({userName: username, password: password, function(err,user)
-		if(err){
-			console.log(err);
-			return res.status(500).send();
-		}
-		if(!user){
-			return res.status(404).send();
-		}
-		
-		return res.status(200).send();
-	})
-}); */
+app.post('/signup', passport.authenticate('local-signup', {
+    successRedirect : '/home', // redirect to the secure profile section
+    failureRedirect : '/signup', // redirect back to the signup page if there is an error
+    failureFlash : true // allow flash messages
+}));
 
-app.get('/login', function(req, res) {
-	
-	
-/*
-  User
-    .find()
-    .exec(theThing);
-
-  function theThing(err) {
-    console.log("something happened");
-    console.log(err);
-  }
-
-  res.render('home');*/
-});
 
 app.get('/help', function(req, res) {
   res.render('help');
