@@ -5,10 +5,9 @@
 	</head>
 	<body>
 		<h1>Welcome to your gallery!</h1>
-		{{#each submissions}}
 		<div class="captionWrapper" id="{{id}}">
 			<div class="image">
-				<img src="{{url}}"/>
+				<img src="{{image}}"/>
 			</div>
 			<div class="caption">
 				{{caption}}
@@ -17,6 +16,8 @@
 				<i class="fa fa-heart"></i>{{cookies}} cookies
 			</div>
 		</div>
-		{{/each}}
+		<img src="uploads/6df2375ec997d3861c3327e88baeba92.jpg">
+		<img src="./uploads/6df2375ec997d3861c3327e88baeba92.jpg">
+		<img src="../uploads/6df2375ec997d3861c3327e88baeba92.jpg">
 	</body>
 </html>

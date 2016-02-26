@@ -11,3 +11,5 @@ var gallerySchema = mongoose.Schema({
 		level: Number
 	},
 });
+
+module.exports = mongoose.model('Gallery', gallerySchema);

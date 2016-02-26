@@ -21,6 +21,7 @@ var db = require('./config/db');
 
 var LocalStrategy   = require('passport-local').Strategy;
 var User            = require('./app/user');
+var Gallery         = require('./app/gallery');
 
 var fs = require('fs');
 var multer = require('multer');
@@ -183,8 +184,11 @@ app.post('/', passport.authenticate('local-login', {
     failureFlash : true // allow flash messages
 }));
 
-app.get('/gallery', function(request, response) {
-	response.render('gallery', data);
+app.get('/gallery', function(req, res) {
+	Gallery.find({}, function(err, data) {
+        console.log(data);
+        res.render('gallery', {image: data[0].local.path, caption: data[0].local.caption, cookies: data[0].local.cookies});
+    });
 });
 
 app.get('/home', isLoggedIn, function(request, response) {
@@ -215,28 +219,48 @@ app.get('/field3', isLoggedIn,  function(request, response) {
 	response.render('field3', {layout:'fieldmaster'});
 });
 
-app.get('/level',  function(req, res) {
+app.get('/level', function(req, res) {
+  //console.log(req.query);
+  //console.log(req.user.email);
+  //console.log(req.user.username);
+  //console.log(req);
+  //console.log(req.user.email);
+  //console.log(req.user.local.email);
   res.render('level');
 });
 
 app.post('/level', upload.single('userPhoto'), function(req, res, next) {
-    console.log(req.body);
-    console.log(req.file);
-});
-
-app.post('/level', function(req, res) {
+    //console.log(req.body.level);
+    //var currentLevel = parseInt(req.query.level);
+    //console.log(currentLevel);
     // get the temporary location of the file
-    var tmp_path = req.file.userPhoto.path;
+    console.log(req.file);
+    var tmp_path = req.file.path;
     // set where the file should actually exists - in this case it is in the "images" directory
-    var target_path = './uploads' + req.file.userPhoto.name + ".jpg";
+    var target_path = 'uploads/' + req.file.filename + '.jpg';
     // move the file from the temporary location to the intended location
     fs.rename(tmp_path, target_path, function(err) {
         if (err) throw err;
         // delete the temporary file, so that the explicitly set temporary upload dir does not get filled with unwanted files
         fs.unlink(tmp_path, function() {
             if (err) throw err;
-            res.send('File uploaded to: ' + target_path + ' - ' + req.file.userPhoto.size + ' bytes');
+            //res.send('File uploaded to: ' + target_path + ' - ' + req.file.size + ' bytes');
         });
+    });
+    var newPicture = new Gallery();
+    newPicture.local.path = target_path;
+    newPicture.local.user = req.user.local.email;
+    newPicture.local.caption = req.body.caption;
+    newPicture.local.cookies = 0;
+    newPicture.local.level = 2;
+
+    newPicture.save(function(err, data) {
+        if (err) {
+            console.log(err);
+        } else {
+            //console.log(data);
+            res.render('level');
+        }
     });
 });
 
