@@ -22,6 +22,12 @@ var db = require('./config/db');
 var LocalStrategy   = require('passport-local').Strategy;
 var User            = require('./app/user');
 
+var fs = require('fs');
+var multer = require('multer');
+var upload = multer({dest: './uploads/'})
+
+
+
 mongoose.connect(db.url);
 
 
@@ -36,6 +42,8 @@ app.set('view engine', 'handlebars');
 app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)
 app.use(bodyParser()); // get information from html forms
+app.use(bodyParser({uploadDir:'./uploads'}));
+
 
 app.use(session({ secret: 'ilovescotchscotchyscotchscotch' })); // session secret
 app.use(passport.initialize());
@@ -207,8 +215,29 @@ app.get('/field3', isLoggedIn,  function(request, response) {
 	response.render('field3', {layout:'fieldmaster'});
 });
 
-app.get('/level', isLoggedIn,  function(req, res) {
+app.get('/level',  function(req, res) {
   res.render('level');
+});
+
+app.post('/level', upload.single('userPhoto'), function(req, res, next) {
+    console.log(req.body);
+    console.log(req.file);
+});
+
+app.post('/level', function(req, res) {
+    // get the temporary location of the file
+    var tmp_path = req.file.userPhoto.path;
+    // set where the file should actually exists - in this case it is in the "images" directory
+    var target_path = './uploads' + req.file.userPhoto.name;
+    // move the file from the temporary location to the intended location
+    fs.rename(tmp_path, target_path, function(err) {
+        if (err) throw err;
+        // delete the temporary file, so that the explicitly set temporary upload dir does not get filled with unwanted files
+        fs.unlink(tmp_path, function() {
+            if (err) throw err;
+            res.send('File uploaded to: ' + target_path + ' - ' + req.file.userPhoto.size + ' bytes');
+        });
+    });
 });
 
 app.get('/signup', function(req, res) {
