@@ -108,7 +108,6 @@ function isLoggedIn(req, res, next) {
                 var newUser            = new User();
 
                 // set the user's local credentials
-				newUser.local.username = req.body.username;
 				newUser.local.password = newUser.generateHash(password);
                 newUser.local.email    = email;
 
@@ -143,7 +142,7 @@ function isLoggedIn(req, res, next) {
 
         // find a user whose email is the same as the forms email
         // we are checking to see if the user trying to login already exists
-        User.findOne({ 'local.username' :  username }, function(err, user) {
+        User.findOne({ 'local.email' :  email }, function(err, user) {
             // if there are any errors, return the error before anything else
             if (err)
                 return done(err);
@@ -165,7 +164,7 @@ function isLoggedIn(req, res, next) {
 
 
 app.get('/', function(request, response) {
-  response.render('index', {layout:'index'});
+  response.render('index', { message: request.flash('loginMessage')} );
 });
 
 
@@ -180,35 +179,35 @@ app.get('/gallery', function(request, response) {
 	response.render('gallery', data);
 });
 
-app.get('/home', function(request, response) {
+app.get('/home', isLoggedIn, function(request, response) {
 	response.render('home');
 });
 
-app.get('/addPets', function(request, response) {
+app.get('/addPets', isLoggedIn,  function(request, response) {
 	response.render('addPets', mypets);
 });
 
-app.get('/selectArea', function(request, response) {
+app.get('/selectArea', isLoggedIn,  function(request, response) {
 	response.render('selectArea');
 });
 
-app.get('/shop', function(request, response) {
+app.get('/shop', isLoggedIn,  function(request, response) {
 	response.render('shop', storepets);
 });
 
-app.get('/field', function(request, response) {
+app.get('/field', isLoggedIn,  function(request, response) {
 	response.render('field', {layout:'fieldmaster'});
 });
 
-app.get('/field2', function(request, response) {
+app.get('/field2', isLoggedIn,  function(request, response) {
 	response.render('field2', {layout:'fieldmaster'});
 });
 
-app.get('/field3', function(request, response) {
+app.get('/field3', isLoggedIn,  function(request, response) {
 	response.render('field3', {layout:'fieldmaster'});
 });
 
-app.get('/level', function(req, res) {
+app.get('/level', isLoggedIn,  function(req, res) {
   res.render('level');
 });
 
@@ -223,7 +222,7 @@ app.post('/signup', passport.authenticate('local-signup', {
 }));
 
 
-app.get('/help', function(req, res) {
+app.get('/help', isLoggedIn,  function(req, res) {
   res.render('help');
 });
 app.get('/submission', function(req, res) {
