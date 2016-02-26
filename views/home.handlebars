@@ -76,5 +76,12 @@
 		</div>
 	</div>
 	<script src="js/jquery.js"></script>
+	{{#if tutorial}}
+	<script>
+		$(window).load(function() {
+			$("#tutorial").modal('show');
+		});
+	</script>
+	{{/if}}
 	<script src="js/home.js"></script>
 </html>
