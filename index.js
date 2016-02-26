@@ -192,7 +192,8 @@ app.get('/gallery', function(req, res) {
 });
 
 app.get('/home', isLoggedIn, function(request, response) {
-	response.render('home');
+	var tutMode = request.query.tutorial
+    response.render('home', {"tutorial": tutMode});
 });
 
 app.get('/addPets', isLoggedIn,  function(request, response) {
@@ -264,16 +265,12 @@ app.post('/level', upload.single('userPhoto'), function(req, res, next) {
     });
 });
 
-app.get('/confirmation',  function(req, res) {
-  res.render('confirmation');
-});
-
 app.get('/signup', function(req, res) {
   res.render('signup');
 });
 
 app.post('/signup', passport.authenticate('local-signup', {
-    successRedirect : '/home', // redirect to the secure profile section
+    successRedirect : '/home?tutorial=true', // redirect to the secure profile section
     failureRedirect : '/signup', // redirect back to the signup page if there is an error
     failureFlash : true // allow flash messages
 }));

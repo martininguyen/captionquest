@@ -1,6 +1,3 @@
-$(window).load(function() {
-	$("#tutorial").modal('show');
-});
 
 function play(obj) {
 	var original = obj.src;
