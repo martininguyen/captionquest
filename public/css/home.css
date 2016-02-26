@@ -28,8 +28,13 @@ ul{
 
 }
 
-li.button{
-	font-size:auto;
+li .icons{
+	font-size: auto;
+}
+
+
+p#utext{
+	font-size: 6px;
 }
 
 
