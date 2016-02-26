@@ -240,6 +240,10 @@ app.post('/level', function(req, res) {
     });
 });
 
+app.get('/confirmation',  function(req, res) {
+  res.render('confirmation');
+});
+
 app.get('/signup', function(req, res) {
   res.render('signup');
 });
