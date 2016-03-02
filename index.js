@@ -187,7 +187,8 @@ app.post('/', passport.authenticate('local-login', {
 app.get('/gallery', function(req, res) {
 	Gallery.find({}, function(err, data) {
         console.log(data);
-        res.render('gallery', {image: data[0].local.path, caption: data[0].local.caption, cookies: data[0].local.cookies});
+        var imageurl = data[0].local.path.replace('/public/', '/');
+        res.render('gallery', {image: imageurl, caption: data[0].local.caption, cookies: data[0].local.cookies});
     });
 });
 
