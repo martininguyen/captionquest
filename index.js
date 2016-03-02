@@ -25,7 +25,7 @@ var Gallery         = require('./app/gallery');
 
 var fs = require('fs');
 var multer = require('multer');
-var upload = multer({dest: './uploads/'})
+var upload = multer({dest: './public/uploads/'})
 
 
 
@@ -43,7 +43,7 @@ app.set('view engine', 'handlebars');
 app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)
 app.use(bodyParser()); // get information from html forms
-app.use(bodyParser({uploadDir:'./uploads'}));
+app.use(bodyParser({uploadDir:'/uploads'}));
 
 
 app.use(session({ secret: 'ilovescotchscotchyscotchscotch' })); // session secret
@@ -173,7 +173,7 @@ function isLoggedIn(req, res, next) {
 
 
 app.get('/', function(request, response) {
-  response.render('index', { message: request.flash('loginMessage')} );
+  response.render('index', { message: request.flash('loginMessage'), layout: 'index'} );
 });
 
 
@@ -238,7 +238,7 @@ app.post('/level', upload.single('userPhoto'), function(req, res, next) {
     console.log(req.file);
     var tmp_path = req.file.path;
     // set where the file should actually exists - in this case it is in the "images" directory
-    var target_path = 'uploads/' + req.file.filename + '.jpg';
+    var target_path = './public/uploads/' + req.file.filename + '.jpg';
     // move the file from the temporary location to the intended location
     fs.rename(tmp_path, target_path, function(err) {
         if (err) throw err;
