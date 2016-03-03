@@ -1,3 +1,9 @@
+html{
+	height: 100vh;
+}
+h1, h3{
+	text-align: center;
+}
 .level {
 	display: block;
 	width: 75px;
