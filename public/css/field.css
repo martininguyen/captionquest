@@ -1,12 +1,8 @@
-.level {
-	display: block;
-	width: 75px;
-	height: 75px;
-	border-radius: 50%;
-	background-color: #33cccc;
-	color: #fff;
+html{
+	height: 100vh;
+}
+h1, h3{
 	text-align: center;
-	line-height: 75px;
 }
 
 .level:hover {
