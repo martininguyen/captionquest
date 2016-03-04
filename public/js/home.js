@@ -3,10 +3,13 @@ function play(obj) {
 	var original = obj.src;
 	if (original.indexOf("1") != -1) {
 		obj.src = original.replace("1", "2");
+		console.log("one");
 	} else if (original.indexOf("2") != -1) {
 		obj.src = original.replace("2", "3");
+		console.log("two");
 	} else {
 		obj.src = original.replace("3", "1");
+		console.log("three");
 	}
 }
 
