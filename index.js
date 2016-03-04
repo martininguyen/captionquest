@@ -321,7 +321,8 @@ app.get('/help', isLoggedIn,  function(req, res) {
 });
 app.get('/submission', function(req, res) {
   Gallery.find({}, function(err, data) {
-    res.render('submission', data);
+    console.log(data);
+    res.render('submission', {gallery: data});
   });
 });
 app.listen(app.get('port'), function() {
