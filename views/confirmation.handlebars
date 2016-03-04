@@ -2,13 +2,29 @@
 <html>
   <head>
     <link rel="stylesheet" type="text/css" href="css/submission.css">
+      <!-- Google Analytics Content Experiment code -->
+  <script>function utmx_section(){}function utmx(){}(function(){var
+  k='117883054-0',d=document,l=d.location,c=d.cookie;
+  if(l.search.indexOf('utm_expid='+k)>0)return;
+  function f(n){if(c){var i=c.indexOf(n+'=');if(i>-1){var j=c.
+  indexOf(';',i);return escape(c.substring(i+n.length+1,j<0?c.
+  length:j))}}}var x=f('__utmx'),xx=f('__utmxx'),h=l.hash;d.write(
+  '<sc'+'ript src="'+'http'+(l.protocol=='https:'?'s://ssl':
+  '://www')+'.google-analytics.com/ga_exp.js?'+'utmxkey='+k+
+  '&utmx='+(x?x:'')+'&utmxx='+(xx?xx:'')+'&utmxtime='+new Date().
+  valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
+  '" type="text/javascript" charset="utf-8"><\/sc'+'ript>')})();
+  </script><script>utmx('url','A/B');</script>
+  <!-- End of Google Analytics Content Experiment code -->
+
+
   </head>
   <body>
     <h3>Level Complete!</h3>
     <p>Now you can earn cookies from others for your creative work!</p>
     <p>Give cookies to others for their creativity!<p>
     
-    <a href="/submission" class="btn btn-xl">See Community Submissions</a>
+    <a href="/submission" class="btn btn-xl" id="submissionLink">See Community Submissions</a>
     <br>
     <a href="/home">Return to Home</a>
 
@@ -21,6 +37,14 @@
 
       ga('create', 'UA-74680260-1', 'auto');
       ga('send', 'pageview');
+
+      $("#submissionLink").click(function() {
+        ga("send", "event", "submissionPage", "click");
+      });
+
+      $("#homeLink").click(function() {
+        ga("send", "event", "homePage", "click");
+      });
 
     </script>
   </body>
