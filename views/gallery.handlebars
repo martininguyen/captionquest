@@ -5,16 +5,11 @@
 	</head>
 	<body>
 		<h1>Welcome to your gallery!</h1>
-		<div class="captionWrapper" id="{{id}}">
-			<div class="image">
-				<img src="{{image}}"/>
-			</div>
-			<div class="caption">
-				{{caption}}
-			</div>
-			<div class="kudos">
-				<i class="fa fa-heart"></i>{{cookies}} cookies
-			</div>
+
+		{{#each gallery}}
+		<div class="captionWrapper" id="c{{id}}">
+		{{> galleryPartial}}
 		</div>
+		{{/each}}
 	</body>
 </html>

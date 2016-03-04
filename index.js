@@ -25,9 +25,7 @@ var Gallery         = require('./app/gallery');
 
 var fs = require('fs');
 var multer = require('multer');
-var upload = multer({dest: './public/uploads/'})
-
-
+var upload = multer({dest: './public/uploads/'});
 
 mongoose.connect(db.url);
 
@@ -185,10 +183,9 @@ app.post('/', passport.authenticate('local-login', {
 }));
 
 app.get('/gallery', function(req, res) {
-	Gallery.find({}, function(err, data) {
+	Gallery.find({'local.user': req.user.local.email}, function(err, data) {
         console.log(data);
-        var imageurl = data[0].local.path.replace('/public/', '/');
-        res.render('gallery', {image: imageurl, caption: data[0].local.caption, cookies: data[0].local.cookies});
+        res.render('gallery', {gallery: data});
     });
 });
 
@@ -323,13 +320,10 @@ app.get('/help', isLoggedIn,  function(req, res) {
   res.render('help');
 });
 app.get('/submission', function(req, res) {
-  var imageURL = "http://placehold.it/500x500";
-  var caption = req.query.caption;
-  var cookies = 0;
-  var id = 100;
-  var newSubmission = {"url": imageURL, "caption": caption, "cookies": cookies, "id": id};
-  data["submissions"].unshift(newSubmission);
-  res.render('submission', data);
+  Gallery.find({}, function(err, data) {
+    console.log(data);
+    res.render('submission', {gallery: data});
+  });
 });
 app.listen(app.get('port'), function() {
   console.log("Node app is running at localhost:" + app.get('port'));
