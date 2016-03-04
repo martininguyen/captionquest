@@ -14,7 +14,7 @@ body {
     float:left;
     position: relative;
     width: 30%;
-    padding-bottom: 45%; /* = width for a 1:1 aspect ratio */
+    padding-bottom: 35%; /* = width for a 1:1 aspect ratio */
     margin:0%;
     overflow:hidden;
 }
@@ -32,15 +32,33 @@ ul{
 }
 
 li .icons{
-	font-size: auto;
+	font-size: 36px;
 }
 
 
-p#utext{
-	font-size: 6px;
+p.utext{
+	font-size: 10px;
 }
 
 
 .portfolio-item:hover {
 	cursor: pointer;
+}
+
+.top-buttons {
+	display: block;
+	margin: 0px auto;
+	margin-top: 20px;
+}
+.top-buttons > li {
+	display: inline-block;
+	text-align: center;
+}
+
+li + li {
+	margin-left: 10%;
+}
+
+.icons:hover {
+	text-decoration: none;
 }
