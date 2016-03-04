@@ -231,7 +231,7 @@ app.get('/level', function(req, res) {
   res.render('level');
 });
 
-app.post('/level', upload.single('userPhoto'), function(req, res, next) {
+app.post('/confirmation', upload.single('userPhoto'), function(req, res, next) {
     //console.log(req.body.level);
     //var currentLevel = parseInt(req.query.level);
     //console.log(currentLevel);
@@ -261,7 +261,42 @@ app.post('/level', upload.single('userPhoto'), function(req, res, next) {
             console.log(err);
         } else {
             //console.log(data);
-            res.render('level');
+            res.render('confirmation');
+        }
+    });
+});
+
+app.post('/confirmation2', upload.single('userPhoto'), function(req, res, next) {
+    //console.log(req.body.level);
+    //var currentLevel = parseInt(req.query.level);
+    //console.log(currentLevel);
+    // get the temporary location of the file
+    console.log(req.file);
+    var tmp_path = req.file.path;
+    // set where the file should actually exists - in this case it is in the "images" directory
+    var target_path = './public/uploads/' + req.file.filename + '.jpg';
+    // move the file from the temporary location to the intended location
+    fs.rename(tmp_path, target_path, function(err) {
+        if (err) throw err;
+        // delete the temporary file, so that the explicitly set temporary upload dir does not get filled with unwanted files
+        fs.unlink(tmp_path, function() {
+            if (err) throw err;
+            //res.send('File uploaded to: ' + target_path + ' - ' + req.file.size + ' bytes');
+        });
+    });
+    var newPicture = new Gallery();
+    newPicture.local.path = target_path;
+    newPicture.local.user = req.user.local.email;
+    newPicture.local.caption = req.body.caption;
+    newPicture.local.cookies = 0;
+    newPicture.local.level = 2;
+
+    newPicture.save(function(err, data) {
+        if (err) {
+            console.log(err);
+        } else {
+            //console.log(data);
+            res.render('confirmation2');
         }
     });
 });
