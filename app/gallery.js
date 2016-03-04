@@ -12,4 +12,7 @@ var gallerySchema = mongoose.Schema({
 	},
 });
 
+gallerySchema.methods.url = function() {
+	return this.local.path.replace('/public/', '/');
+};
 module.exports = mongoose.model('Gallery', gallerySchema);
