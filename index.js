@@ -320,7 +320,7 @@ app.get('/help', isLoggedIn,  function(req, res) {
   res.render('help');
 });
 app.get('/submission', function(req, res) {
-  Gallery.find({}, function() {
+  Gallery.find({}, function(err, data) {
     res.render('submission', data);
   }).sort({$natural:-1});
 });
