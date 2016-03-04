@@ -34,6 +34,7 @@ mongoose.connect(db.url);
 
 app.set('port', (process.env.PORT || 5000));
 app.use(express.static(__dirname + '/public'));
+app.use(express.directory(__dirname + '/public/uploads'));
 app.set('views', path.join(__dirname, 'views'));
 
 //app.use(express.static(__dirname + '/public'));
@@ -187,6 +188,10 @@ app.post('/', passport.authenticate('local-login', {
 app.get('/gallery', function(req, res) {
 	Gallery.find({'local.user': req.user.local.email}, function(err, data) {
         console.log(data);
+
+        for (var i = 0; i < data.length; i++) {
+            data[i].local.path.replace('/public/', '/');
+        }
         var imageurl = data[0].local.path.replace('/public/', '/');
         res.render('gallery', {image: imageurl, caption: data[0].local.caption, cookies: data[0].local.cookies});
     });
