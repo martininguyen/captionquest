@@ -115,6 +115,23 @@ h6 {
     background-color: #fff;
 }
 
+.btn-margin {
+    margin: 10px;
+}
+
+.btn-center {
+    margin: 0px auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.btn-default {
+    text-transform: uppercase;
+    font-family: 'Hammersmith One', sans-serif;
+    font-weight: 700;
+}
+
 .btn-primary {
     border-color: #4ecdc4;
     text-transform: uppercase;
@@ -174,6 +191,11 @@ fieldset[disabled] .btn-primary.active {
     font-weight: 700;
     color: #556270;
     background-color: #4ecdc4;
+    margin: 0px auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: block;
+
 }
 
 .btn-xl:hover,
