@@ -3,13 +3,12 @@ html{
 }
 
 @font-face{
-    font-family: "Bebas Neue Book"
-	src: url(font/BebasNeue-Book.otf)
+    font-family: 'Source Sans Pro', sans-serif;
 }
  
 body {
     overflow-x: hidden;
-    font-family: "Roboto Slab","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: 'Source Sans Pro', sans-serif;
 	margin: 0;
 	padding-left:150px;
 	padding-right:150px;
@@ -20,7 +19,7 @@ body {
 @media(max-width:1300px) {
 body{
     overflow-x: hidden;
-    font-family: "Roboto Slab","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: 'Source Sans Pro', sans-serif;
 	margin: 0;
 	padding-left:25px;
 	padding-right:25px;
@@ -75,6 +74,22 @@ a.active {
     color: #4ecdc4;
 }
 
+.caption-quest {
+    text-transform: uppercase;
+    font-family: 'Sigmar One', cursive;
+    font-size: 22px;
+    line-height: 50px;
+}
+
+.logout {
+    text-transform: uppercase;
+    font-family: 'Hammersmith One', sans-serif;
+    font-size: 18px;
+    right: 18px;
+    position: absolute;
+    display: inline-block;
+}
+
 h1,
 h2,
 h3,
@@ -82,8 +97,8 @@ h4,
 h5,
 h6 {
     text-transform: uppercase;
-    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-weight: 700;
+    font-family: 'Hammersmith One', sans-serif;
+    font-weight: 400;
 }
 
 .img-centered {
@@ -103,7 +118,7 @@ h6 {
 .btn-primary {
     border-color: #4ecdc4;
     text-transform: uppercase;
-    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: 'Hammersmith One', sans-serif;
     font-weight: 700;
     color: #556270;
     background-color: #4ecdc4;
@@ -154,7 +169,7 @@ fieldset[disabled] .btn-primary.active {
     border-color: #4ecdc4;
     border-radius: 3px;
     text-transform: uppercase;
-    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: 'Hammersmith One', sans-serif;
     font-size: 18px;
     font-weight: 700;
     color: #556270;
@@ -238,7 +253,7 @@ fieldset[disabled] .btn-xl.active {
 
 .navbar-default .nav li a {
     text-transform: uppercase;
-    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: 'Hammersmith One', sans-serif;
     font-weight: 400;
     letter-spacing: 1px;
     color: #556270;
@@ -344,16 +359,15 @@ header .intro {
 
 header .intro .intro-head {
     margin-bottom: 25px;
-    font-family: "Droid Serif","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: 'Source Sans Pro', sans-serif;
     font-size: 22px;
-    font-style: italic;
     line-height: 22px;
 }
 
 header .intro .intro-subhead {
     margin-bottom: 25px;
     text-transform: uppercase;
-    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: 'Sigmar One', cursive;
     font-size: 50px;
     font-weight: 700;
     line-height: 50px;
@@ -367,7 +381,7 @@ header .intro .intro-subhead {
 
     header .intro .intro-head {
         margin-bottom: 25px;
-        font-family: "Droid Serif","Helvetica Neue",Helvetica,Arial,sans-serif;
+        font-family: 'Source Sans Pro', sans-serif;
         font-size: 40px;
         font-style: italic;
         line-height: 40px;
@@ -376,9 +390,8 @@ header .intro .intro-subhead {
     header .intro .intro-subhead {
         margin-bottom: 50px;
         text-transform: none;
-        font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+        font-family: 'Sigmar One', cursive;
         font-size: 75px;
-        font-weight: 700;
         line-height: 75px;
     }
 }
@@ -398,7 +411,7 @@ section h2.secthead {
 section h3.sectsub {
     margin-bottom: 0px;
 	text-transform: none; 
-    font-family: "Droid Serif","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: 'Source Sans Pro', sans-serif;
     font-size: 14px;
     font-weight: 400;
     padding-right: 10px; 
@@ -420,7 +433,7 @@ section h3.sectsub {
     section h3.sectsub {
     margin-bottom: 0;
 	text-transform: none; 
-    font-family: "Droid Serif","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: 'Source Sans Pro', sans-serif;
     font-size: 22px;
     font-weight: 400;
     padding-right: 10px; 
@@ -442,7 +455,7 @@ footer {
 footer span.copyright {
     text-transform: uppercase;
     text-transform: none;
-    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: 'Hammersmith One', sans-serif;
     line-height: 40px;
 }
 
@@ -450,7 +463,7 @@ footer ul.quicklinks {
     margin-bottom: 0;
     text-transform: uppercase;
     text-transform: none;
-    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: 'Hammersmith One', sans-serif;
     line-height: 40px;
 }
 
@@ -507,6 +520,20 @@ img::-moz-selection {
 
 body {
     webkit-tap-highlight-color: #4ecdc4;
+}
+
+.wordmark {
+    width: 100;
+}
+
+.float-right {
+    float:right;
+    display:inline-block;
+    width:20%;
+}
+
+.float-left {
+    float:left;
 }
 
 .main-icon {
