@@ -270,6 +270,9 @@ app.get('/confirmation', function(req, res){
     res.render('confirmation');
 })
 
+app.get('/confirmation2', function(req, res) {
+    res.render('confirmation2');
+});
 app.get('/signup', function(req, res) {
   res.render('signup');
 });
