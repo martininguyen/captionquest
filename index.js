@@ -185,7 +185,7 @@ app.post('/', passport.authenticate('local-login', {
 }));
 
 app.get('/gallery', function(req, res) {
-	Gallery.find({}, function(err, data) {
+	Gallery.find({'local.user': req.user.local.email}, function(err, data) {
         console.log(data);
         var imageurl = data[0].local.path.replace('/public/', '/');
         res.render('gallery', {image: imageurl, caption: data[0].local.caption, cookies: data[0].local.cookies});
