@@ -306,7 +306,7 @@ app.get('/confirmation2', function(req, res) {
     res.render('confirmation2');
 });
 app.get('/signup', function(req, res) {
-  res.render('signup');
+  res.render('signup', {layout: 'index'});
 });
 
 app.post('/signup', passport.authenticate('local-signup', {
