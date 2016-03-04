@@ -7,16 +7,8 @@
 		<h1>Welcome to your gallery!</h1>
 
 		{{#each gallery}}
-		<div class="captionWrapper" id="c{{_id}}">
-			<div class="image">
-				<img src="{{url}}"/>
-			</div>
-			<div class="caption">
-				{{local.caption}}
-			</div>
-			<div class="kudos">
-				<i class="fa fa-heart"></i>{{local.cookies}} cookies
-			</div>
+		<div class="captionWrapper" id="c{{id}}">
+		{{> galleryPartial}}
 		</div>
 		{{/each}}
 	</body>

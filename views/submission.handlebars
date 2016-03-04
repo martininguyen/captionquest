@@ -8,15 +8,7 @@
 		<p>Give others cookies for their creativity! (Giving cookies to others does not deplete your own supply)</p>
 		{{#each submissions}}
 		<div class="captionWrapper" id="{{id}}">
-			<div class="image">
-				<img src="{{url}}"/>
-			</div>
-			<div class="caption">
-				{{caption}}
-			</div>
-			<div class="kudos">
-				<i class="fa fa-heart"></i><span class="cookies" id="c{{id}}">{{cookies}}</span> cookies
-			</div>
+			{{> galleryPartial}}
 			<button class="cookieButton" id="cookie{{id}}">Give Cookies</button>
 		</div>
 		{{/each}}

@@ -25,9 +25,7 @@ var Gallery         = require('./app/gallery');
 
 var fs = require('fs');
 var multer = require('multer');
-var upload = multer({dest: './public/uploads/'})
-
-
+var upload = multer({dest: './public/uploads/'});
 
 mongoose.connect(db.url);
 
@@ -322,13 +320,9 @@ app.get('/help', isLoggedIn,  function(req, res) {
   res.render('help');
 });
 app.get('/submission', function(req, res) {
-  var imageURL = "http://placehold.it/500x500";
-  var caption = req.query.caption;
-  var cookies = 0;
-  var id = 100;
-  var newSubmission = {"url": imageURL, "caption": caption, "cookies": cookies, "id": id};
-  data["submissions"].unshift(newSubmission);
-  res.render('submission', data);
+  Gallery.find({}, function() {
+    res.render('submission', data);
+  }).sort({$natural:-1});
 });
 app.listen(app.get('port'), function() {
   console.log("Node app is running at localhost:" + app.get('port'));
