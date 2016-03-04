@@ -1,0 +1,15 @@
+body {
+	display: block;
+	margin: 0px auto;
+}
+
+#submissionLink {
+	display: block;
+	margin: 0px auto;
+}
+
+#homeLink {
+	display: block;
+	margin: 0px auto;
+	text-align: center;
+}
