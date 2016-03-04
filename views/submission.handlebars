@@ -6,8 +6,8 @@
 	<body>
 		<h2>Community Submissions</h2>
 		<p>Give others cookies for their creativity! (Giving cookies to others does not deplete your own supply)</p>
-		{{#each submissions}}
-		<div class="captionWrapper" id="{{id}}">
+		{{#each data}}
+		<div class="captionWrapper" id="c{{id}}">
 			{{> galleryPartial}}
 			<button class="cookieButton" id="cookie{{id}}">Give Cookies</button>
 		</div>
