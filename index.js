@@ -322,7 +322,7 @@ app.get('/help', isLoggedIn,  function(req, res) {
 app.get('/submission', function(req, res) {
   Gallery.find({}, function(err, data) {
     res.render('submission', data);
-  }).sort({$natural:-1});
+  });
 });
 app.listen(app.get('port'), function() {
   console.log("Node app is running at localhost:" + app.get('port'));
