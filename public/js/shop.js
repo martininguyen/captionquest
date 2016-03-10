@@ -1,5 +1,3 @@
-var User            = require('./app/user');
-
 function buy(name, price) {
 	var cookies = $('#numcookies').html();
 	var p = parseInt(price);

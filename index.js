@@ -115,8 +115,59 @@ function isLoggedIn(req, res, next) {
                 var newUser            = new User();
 
                 // set the user's local credentials
-				newUser.local.password = newUser.generateHash(password);
+                newUser.local.password = newUser.generateHash(password);
                 newUser.local.email    = email;
+                newUser.local.cookies = 0;
+                newUser.local.pets = [
+                                        {
+                                            "name": "Flertz",
+                                            "picture": "./img/pet/pet8_flertz1.png",
+                                            "description": "Not too sure what she's supposed to be, but cute nonetheless!",
+                                            "price": "100",
+                                            "id": "flertz",
+                                            "bought" : false
+                                        },
+                                        {
+                                            "name": "Kurt",
+                                            "picture": "./img/pet/pet8_kurt1.png",
+                                            "description": "Didn't you know the internet is overrun with Kurtz?",
+                                            "price": "100",
+                                            "id": "kurt",
+                                            "bought" : false
+                                        },
+                                        {
+                                            "name": "Lerfs",
+                                            "picture": "./img/pet/pet8_lerfs1.png",
+                                            "description": "Make like a tree and don't ever lerf me!",
+                                            "price": "100",
+                                            "id": "lerfs",
+                                            "bought" : false
+                                        },
+                                        {
+                                            "name": "Poterto",
+                                            "picture": "./img/pet/pet8_poterto1.png",
+                                            "description": "So round. So beautiful. So versatile. Poterto.",
+                                            "price": "100",
+                                            "id": "poterto",
+                                            "bought" : false
+                                        },
+                                        {
+                                            "name": "Squrl",
+                                            "picture": "./img/pet/pet8_squrl1.png",
+                                            "description": "HI! I'M SQURL!",
+                                            "price": "100",
+                                            "id": "squrl",
+                                            "bought" : false
+                                        },
+                                        {
+                                            "name": "Terfoo",
+                                            "picture": "./img/pet/pet8_terfoo1.png",
+                                            "description": "Terfoo will keep you and your health goals accountable!",
+                                            "price": "100",
+                                            "id": "terfoo",
+                                            "bought" : false
+                                        }
+                                    ]
 
                 // save the user
                 newUser.save(function(err) {
@@ -130,10 +181,10 @@ function isLoggedIn(req, res, next) {
 
         });
 
-	}));
-	
-	
-	// =========================================================================
+    }));
+    
+    
+    // =========================================================================
     // LOCAL LOGIN =============================================================
     // =========================================================================
     // we are using named strategies since we have one for login and one for signup
@@ -183,39 +234,43 @@ app.post('/', passport.authenticate('local-login', {
 }));
 
 app.get('/gallery', function(req, res) {
-	Gallery.find({'local.user': req.user.local.email}, function(err, data) {
-        console.log(data);
+    Gallery.find({'local.user': req.user.local.email}, function(err, data) {
         res.render('gallery', {gallery: data});
     });
 });
 
 app.get('/home', isLoggedIn, function(request, response) {
-	var tutMode = request.query.tutorial
+    var tutMode = request.query.tutorial
     response.render('home', {"tutorial": tutMode});
 });
 
 app.get('/addPets', isLoggedIn,  function(request, response) {
-	response.render('addPets', mypets);
+    response.render('addPets', mypets);
 });
 
 app.get('/selectArea', isLoggedIn,  function(request, response) {
-	response.render('selectArea');
+    response.render('selectArea');
 });
 
 app.get('/shop', isLoggedIn,  function(request, response) {
-	response.render('shop', storepets);
+    User.findOne({'local.email': request.user.local.email}, function(err, data) {
+        console.log(data.local.pets);
+        //console.log(data.local.pets);
+        response.render('shop', {pets: data.local.pets, cookies: data.local.cookies});
+    });
+    
 });
 
 app.get('/field', isLoggedIn,  function(request, response) {
-	response.render('field', {layout:'fieldmaster'});
+    response.render('field', {layout:'fieldmaster'});
 });
 
 app.get('/field2', isLoggedIn,  function(request, response) {
-	response.render('field2', {layout:'fieldmaster'});
+    response.render('field2', {layout:'fieldmaster'});
 });
 
 app.get('/field3', isLoggedIn,  function(request, response) {
-	response.render('field3', {layout:'fieldmaster'});
+    response.render('field3', {layout:'fieldmaster'});
 });
 
 app.get('/level', function(req, res) {
@@ -325,8 +380,6 @@ app.get('/submission', function(req, res) {
     res.render('submission', {gallery: data});
   });
 });
-
-
 app.listen(app.get('port'), function() {
   console.log("Node app is running at localhost:" + app.get('port'));
 });
