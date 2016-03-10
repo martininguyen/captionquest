@@ -5,9 +5,10 @@
 	</head>
 	<body>
 		<h2>Shop</h2>
-		<h3>Cookies: <span id="numcookies">1000</span></h3>
+		<h3>Cookies: <span id="numcookies">{{cookies}}</span></h3>
 		<div class="content">
 			{{#each pets}}
+			{{#unless bought}}
 			<div class="product">
 				<div class="image">
 					<img src="{{picture}}"/>
@@ -40,6 +41,7 @@
 				  </div>
 				</div>
 			</div>
+			{{/unless}}
 			{{/each}}
 		</div>
 		<script src="js/shop.js"></script>

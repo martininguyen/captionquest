@@ -117,6 +117,57 @@ function isLoggedIn(req, res, next) {
                 // set the user's local credentials
 				newUser.local.password = newUser.generateHash(password);
                 newUser.local.email    = email;
+				newUser.local.cookies = 0;
+				newUser.local.pets = [
+										{
+											"name": "Flertz",
+											"picture": "./img/pet/pet8_flertz1.png",
+											"description": "Not too sure what she's supposed to be, but cute nonetheless!",
+											"price": "100",
+											"id": "flertz",
+											"bought" : false
+										},
+										{
+											"name": "Kurt",
+											"picture": "./img/pet/pet8_kurt1.png",
+											"description": "Didn't you know the internet is overrun with Kurtz?",
+											"price": "100",
+											"id": "kurt",
+											"bought" : false
+										},
+										{
+											"name": "Lerfs",
+											"picture": "./img/pet/pet8_lerfs1.png",
+											"description": "Make like a tree and don't ever lerf me!",
+											"price": "100",
+											"id": "lerfs",
+											"bought" : false
+										},
+										{
+											"name": "Poterto",
+											"picture": "./img/pet/pet8_poterto1.png",
+											"description": "So round. So beautiful. So versatile. Poterto.",
+											"price": "100",
+											"id": "poterto",
+											"bought" : false
+										},
+										{
+											"name": "Squrl",
+											"picture": "./img/pet/pet8_squrl1.png",
+											"description": "HI! I'M SQURL!",
+											"price": "100",
+											"id": "squrl",
+											"bought" : false
+										},
+										{
+											"name": "Terfoo",
+											"picture": "./img/pet/pet8_terfoo1.png",
+											"description": "Terfoo will keep you and your health goals accountable!",
+											"price": "100",
+											"id": "terfoo",
+											"bought" : false
+										}
+									]
 
                 // save the user
                 newUser.save(function(err) {
@@ -203,7 +254,10 @@ app.get('/selectArea', isLoggedIn,  function(request, response) {
 });
 
 app.get('/shop', isLoggedIn,  function(request, response) {
-	response.render('shop', storepets);
+	User.find({'local.user': request.user.local.email}, function(err, data) {
+        response.render('shop', {pets: data.local.pets, cookies: data.local.cookies});
+    });
+	
 });
 
 app.get('/field', isLoggedIn,  function(request, response) {
