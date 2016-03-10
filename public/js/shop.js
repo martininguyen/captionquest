@@ -1,4 +1,4 @@
-var mypets = require("./mypets.json");
+var User            = require('./app/user');
 
 function buy(name, price) {
 	var cookies = $('#numcookies').html();
