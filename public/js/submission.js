@@ -1,8 +1,16 @@
+var Gallery         = require('../app/gallery');
 $(".cookieButton").click(function() {
-	console.log(this);
+	var cookieNumId = this.id.replace("cookie", "cNum");
 	var id = this.id.replace("cookie", "");
-	console.log(id);
-	var original = $("#c" + id).html();
-	console.log(original);
-	$("#c" + id).html(++original);
+	Gallery.findOne({'_id': id}, 'local.cookies local.user', function(err, image) {
+		if (err) {
+			console.log(err);
+		}
+		image.local.cookies += 1;
+		$("#" + cookieNumId).text(image.local.cookies);
+
+		User.findOne({'local.email': image.local.user}, 'cookies', function(err, person) {
+			person.local.cookies += 1;
+		});
+	});
 });
