@@ -245,7 +245,11 @@ app.get('/home', isLoggedIn, function(request, response) {
 });
 
 app.get('/addPets', isLoggedIn,  function(request, response) {
-    response.render('addPets', mypets);
+    User.findOne({'local.email': request.user.local.email}, function(err, data) {
+        console.log(data.local.pets);
+        //console.log(data.local.pets);
+        response.render('addPets', {pets: data.local.pets});
+    });
 });
 
 app.get('/selectArea', isLoggedIn,  function(request, response) {
