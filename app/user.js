@@ -6,7 +6,15 @@ var userSchema = mongoose.Schema({
 	local: {
 		password: String,
 		email: String,
-		pets: [],
+		pets: [{
+			name: String,
+			picture: String,
+			description: String,
+			price: Number,
+			id: String,
+			bought: Boolean,
+			location: Number
+		}],
 		cookies: Number
 	},
 });
@@ -22,4 +30,9 @@ userSchema.methods.validPassword = function(password) {
     return bcrypt.compareSync(password, this.local.password);
 };
 
+userSchema.methods.isEqual = function() {
+	console.log(this);
+	if (this == -1) return true;
+	return false;
+}
 module.exports = mongoose.model('myuser', userSchema);

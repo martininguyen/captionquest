@@ -36,14 +36,10 @@ function tutorial() {
 			i++;
 			break;
 		case 5:
-			$(".modal-body").html("After you buy some pets, you can place them in your home by clicking on the 'Add Pet' button on your home page.");
-			i++;
-			break;
-		case 6:
 			$(".modal-body").html("You can also play with your pets by clicking on them! They're very playful!");
 			i++;
 			break;
-		case 7:
+		case 6:
 			i++;
 			$(".modal-body").html("Well, that's all for now. Revisit the tutorial at any time by clicking on 'Tutorial' or reading a shorter version on the help page <i class='fa fa-question'></i>");
 			$("#cont").hide();
