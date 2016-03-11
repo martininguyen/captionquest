@@ -9,7 +9,7 @@
 		<div class="content">
 			{{#each pets}}
 			{{#unless bought}}
-			<div class="product">
+			<div class="product" id="p{{name}}">
 				<div class="image">
 					<img src="{{picture}}"/>
 				</div>
@@ -19,7 +19,7 @@
 				<div class="price">
 					<h5>{{price}}</h5>
 				</div>
-				<button class="buy btn btn-primary" data-toggle="modal" data-target="#{{id}}">Buy</button>
+				<button class="buy btn btn-primary" id="pet2{{name}}" data-toggle="modal" data-target="#{{id}}">Buy</button>
 				<div class="modal fade" id="{{id}}" tabindex="-1" role="dialog" aria-labelledby="{{name}}">
 				  <div class="modal-dialog" role="document">
 				    <div class="modal-content">
@@ -34,10 +34,8 @@
 				      	</div>
 				      </div>
 				      <div class="modal-footer">
-						<form action="" method="post">
-							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>					
-							<button type="submit" id="pet{{name}}" class="btn btn-primary" name={{id}} value={{price}} onclick="buy('{{name}}', '{{price}}')">Buy</button>
-						</form>
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>					
+						<button type="submit" id="pet{{name}}" class="btn btn-primary" name={{id}} onclick="buy('{{name}}', {{price}})">Buy</button>
 				      </div>
 				    </div>
 				  </div>

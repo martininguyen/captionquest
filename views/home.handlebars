@@ -6,40 +6,19 @@
 	</body>
 	<div class="background">
 		<ul class="top-buttons">
-			<li><a href="/addPets" class="fa fa-plus fa-3x icons" ><p class="utext">Add Pets</p></a></li>
 			<li><a href="/gallery" class="fa fa-picture-o fa-3x icons"><p class="utext">Gallery</p></a></li>
 			<li><a href="#" class="fa fa-info icons fa-3x" data-toggle="modal" data-target="#tutorial" onclick="tutorial()"><p class="utext">Tutorial</p></a></li>
 		</ul>
 		<div class="grid">
+			{{#each pets}}
+			{{#if bought}}
 			<div class="square">
 				<div class="content">
-					
+						<img class="img-responsive portfolio-item" src="{{picture}}" onclick="play(this)" alt="">
 				</div>
 			</div>
-			<div class="square">
-				<div class="content">
-					<img class="img-responsive portfolio-item" src="img/pet/pet8_berluun1.png" onclick="play(this)" alt="">
-				</div>
-			</div>
-			<div class="square">
-				<div class="content">
-				</div>
-			</div>
-			<div class="square">
-				<div class="content">
-					
-				</div>
-			</div>
-			<div class="square">
-				<div class="content">
-
-				</div>
-			</div>
-			<div class="square">
-				<div class="content">
-				</div>
-			</div>
-
+			{{/if}}
+			{{/each}}
 			<div class="modal fade" id="tutorial" tabindex="-1" role="dialog" aria-labelledby="Tutorial">
 			  <div class="modal-dialog" role="document">
 			    <div class="modal-content">
@@ -57,22 +36,6 @@
 			    </div>
 			  </div>
 			</div>
-			<div class="square">
-				<div class="content">
-					<img class="img-responsive portfolio-item" src="img/pet/pet8_blerb1.png" onclick="play(this)" alt="">
-				</div>
-			</div>
-			<div class="square">
-				<div class="content">
-
-				</div>
-			</div>
-			<div class="square">
-				<div class="content">
-					<img class="img-responsive portfolio-item" src="img/pet/pet8_flern1.png" onclick="play(this)" alt="">
-				</div>
-			</div>
-
 		</div>
 	</div>
 	<script src="js/jquery.js"></script>

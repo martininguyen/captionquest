@@ -26,6 +26,9 @@ var Gallery         = require('./app/gallery');
 var fs = require('fs');
 var multer = require('multer');
 var upload = multer({dest: './public/uploads/'});
+var captions = require('./captions.json');
+
+var selectedPet;
 
 mongoose.connect(db.url);
 
@@ -120,52 +123,94 @@ function isLoggedIn(req, res, next) {
                 newUser.local.cookies = 0;
                 newUser.local.pets = [
                                         {
+                                            "name": "Banurna",
+                                            "picture": "./img/pet/pet8_banurna1.png",
+                                            "description": "High in potassium and Vitamin A-dorable!",
+                                            "price": 100,
+                                            "id": "banurna",
+                                            "bought": false,
+                                            "location": -1
+                                        },
+                                        {
+                                            "name": "Berluun",
+                                            "picture": "./img/pet/pet8_berluun1.png",
+                                            "description": "So cute you wouldn't want to let him go!",
+                                            "price": 100,
+                                            "id": "berluun",
+                                            "bought": false,
+                                            "location": -1
+                                        },
+                                        {
+                                            "name": "Blerb",
+                                            "picture": "./img/pet/pet8_blerb1.png",
+                                            "description": "The very embodiment of how you are feeling at any given moment",
+                                            "price": 100,
+                                            "id": "blerb",
+                                            "bought": false,
+                                            "location": -1
+                                        },
+                                        {
+                                            "name": "Flern",
+                                            "picture": "./img/pet/pet8_flern1.png",
+                                            "description": "The sweetest of all pets!",
+                                            "price": 100,
+                                            "id": "flern",
+                                            "bought": false,
+                                            "location": -1
+                                        },
+                                        {
                                             "name": "Flertz",
                                             "picture": "./img/pet/pet8_flertz1.png",
                                             "description": "Not too sure what she's supposed to be, but cute nonetheless!",
-                                            "price": "100",
+                                            "price": 100,
                                             "id": "flertz",
-                                            "bought" : false
+                                            "bought" : false,
+                                            "location": -1
                                         },
                                         {
                                             "name": "Kurt",
                                             "picture": "./img/pet/pet8_kurt1.png",
                                             "description": "Didn't you know the internet is overrun with Kurtz?",
-                                            "price": "100",
+                                            "price": 100,
                                             "id": "kurt",
-                                            "bought" : false
+                                            "bought" : false,
+                                            "location": -1
                                         },
                                         {
                                             "name": "Lerfs",
                                             "picture": "./img/pet/pet8_lerfs1.png",
                                             "description": "Make like a tree and don't ever lerf me!",
-                                            "price": "100",
+                                            "price": 100,
                                             "id": "lerfs",
-                                            "bought" : false
+                                            "bought" : false,
+                                            "location": -1
                                         },
                                         {
                                             "name": "Poterto",
                                             "picture": "./img/pet/pet8_poterto1.png",
                                             "description": "So round. So beautiful. So versatile. Poterto.",
-                                            "price": "100",
+                                            "price": 100,
                                             "id": "poterto",
-                                            "bought" : false
+                                            "bought" : false,
+                                            "location": -1
                                         },
                                         {
                                             "name": "Squrl",
                                             "picture": "./img/pet/pet8_squrl1.png",
                                             "description": "HI! I'M SQURL!",
-                                            "price": "100",
+                                            "price": 100,
                                             "id": "squrl",
-                                            "bought" : false
+                                            "bought" : false,
+                                            "location": -1
                                         },
                                         {
                                             "name": "Terfoo",
                                             "picture": "./img/pet/pet8_terfoo1.png",
                                             "description": "Terfoo will keep you and your health goals accountable!",
-                                            "price": "100",
+                                            "price": 100,
                                             "id": "terfoo",
-                                            "bought" : false
+                                            "bought" : false,
+                                            "location": -1
                                         }
                                     ]
 
@@ -240,25 +285,36 @@ app.get('/gallery', function(req, res) {
 });
 
 app.get('/home', isLoggedIn, function(request, response) {
-    var tutMode = request.query.tutorial
-    response.render('home', {"tutorial": tutMode});
+    var tutMode = request.query.tutorial;
+    User.findOne({'local.email': request.user.local.email}, 'local.pets', function(err, data) {
+        response.render('home', {"tutorial": tutMode, "pets": data.local.pets});
+    });
 });
 
 app.get('/addPets', isLoggedIn,  function(request, response) {
     User.findOne({'local.email': request.user.local.email}, function(err, data) {
-        console.log(data.local.pets);
         //console.log(data.local.pets);
         response.render('addPets', {pets: data.local.pets});
     });
 });
 
+app.post('/addPets', isLoggedIn, function(req, res) {
+    var location = req.query.location;
+    var petIndex = getPetIndex(selectedPet);
+    User.findOne({'local.email': req.user.local.email}, function(err, data) {
+        data.local.pets[petIndex].location = location;
+        data.save(function(err) {
+            //callback
+        });
+    });
+});
 app.get('/selectArea', isLoggedIn,  function(request, response) {
+    selectedPet = request.query.pet;
     response.render('selectArea');
 });
 
 app.get('/shop', isLoggedIn,  function(request, response) {
     User.findOne({'local.email': request.user.local.email}, function(err, data) {
-        console.log(data.local.pets);
         //console.log(data.local.pets);
         response.render('shop', {pets: data.local.pets, cookies: data.local.cookies});
     });
@@ -266,7 +322,21 @@ app.get('/shop', isLoggedIn,  function(request, response) {
 });
 
 app.post('/shop', function(req, res){
-	console.log(req.body.name);
+    var petName = req.body.name;
+    var price = req.body.price;
+    var petIndex = getPetIndex(petName);
+
+    User.findOne({'local.email': req.user.local.email}, function(err, data) {
+        data.local.pets[petIndex].bought = true;
+        console.log(data.local.pets[petIndex].bought);
+        data.local.cookies -= price;
+        data.save(function(err) {
+            if (err) {
+                console.log(err);
+            }
+        });
+    });
+    res.send("success");
 });
 
 app.get('/field', isLoggedIn,  function(request, response) {
@@ -282,7 +352,11 @@ app.get('/field3', isLoggedIn,  function(request, response) {
 });
 
 app.get('/level', function(req, res) {
-  res.render('level');
+  var level = parseInt(req.query.level);
+  level--;
+  var caption = captions.captions[level].caption;
+  //var caption = captions[level].caption;
+  res.render('level', {caption: caption});
 });
 
 app.post('/confirmation', upload.single('userPhoto'), function(req, res, next) {
@@ -376,9 +450,7 @@ app.post('/cookies', function(req, res) {
     Gallery.findOne({'_id': req.body.cookieId}, 'local.cookies local.user', function(err, data) {
         var currentCookies = parseInt(data.local.cookies);
         currentCookies++;
-        console.log(data.local.cookies);
         data.local.cookies = currentCookies;
-        console.log(data.local.cookies);
         data.save(function(err) {
             // callback
         });
@@ -403,3 +475,29 @@ app.get('/submission', function(req, res) {
 app.listen(app.get('port'), function() {
   console.log("Node app is running at localhost:" + app.get('port'));
 });
+
+
+function getPetIndex(petName) {
+    switch (petName) {
+        case "Banurna":
+            return petIndex = 0;
+        case "Berluun":
+            return petIndex = 1;
+        case "Blerb":
+            return petIndex = 2;
+        case "Flern":
+            return petIndex = 3;
+        case "Flertz":
+            return petIndex = 4;
+        case "Kurt":
+            return petIndex = 5;
+        case "Lerfs":
+            return petIndex = 6;
+        case "Poterto":
+            return petIndex = 7;
+        case "Squrl":
+            return petIndex = 8;
+        case "Terfoo":
+            return petIndex = 9;
+    }
+}

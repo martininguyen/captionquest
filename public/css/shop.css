@@ -49,3 +49,7 @@
 	width: 50%;
 	display: inline-block;
 }
+
+.content {
+    padding-bottom: 100px;
+}

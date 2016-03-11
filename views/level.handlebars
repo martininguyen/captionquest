@@ -6,16 +6,18 @@
 	<body>
 		<a href="/field" class="btn btn-default btn-margin"> << Back to the field </a>
 		<form action="/confirmation" enctype="multipart/form-data" method="post"> 
+		<div class="content">
 		<div class="captionWrapper">
 			<div id="imageWrapper">
 				<input type="file" name="userPhoto" id="fileUpload">
 				<!--<button class="upload">Upload <i class="fa fa-camera"></i></button> -->
 			</div>
-				<textarea readonly class="caption" id="caption" name="caption">"Because everything's better with your #besties! #sincedayone #tbt"</textarea>
+				<textarea readonly class="caption" id="caption" name="caption">{{caption}}</textarea>
 			<input type="submit" class="btn btn-xl btn-center" value="Upload">
 		</div>
 	</form>
 		<a href="/submission">Need some inspiration? Check out other works!</a>
+	</div>
 		<script src="js/jquery.js"></script>
 		<script src="js/level.js"></script>
 	</body>
