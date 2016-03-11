@@ -370,13 +370,31 @@ app.post('/signup', passport.authenticate('local-signup', {
     failureFlash : true // allow flash messages
 }));
 
-
+app.post('/cookies', function(req, res) {
+    Gallery.findOne({'_id': req.body.cookieId}, 'local.cookies local.user', function(err, data) {
+        var currentCookies = parseInt(data.local.cookies);
+        currentCookies++;
+        console.log(data.local.cookies);
+        data.local.cookies = currentCookies;
+        console.log(data.local.cookies);
+        data.save(function(err) {
+            // callback
+        });
+        var user = data.local.user;
+        User.findOne({'local.email': user}, 'local.cookies', function(err, data2) {
+            data2.local.cookies += 10;
+            data2.save(function(err) {
+                // callback
+            });
+        });
+    });
+    res.send("successful");
+});
 app.get('/help', isLoggedIn,  function(req, res) {
   res.render('help');
 });
 app.get('/submission', function(req, res) {
   Gallery.find({}, function(err, data) {
-    console.log(data);
     res.render('submission', {gallery: data});
   });
 });
