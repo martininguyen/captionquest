@@ -20,6 +20,7 @@
 <div class="content">
         <h2>Pet Book</h2>
             {{#each pets}}
+			{{#if bought}}
             <div class="product">
                 <div class="image">
                     <img src="{{picture}}"/>
@@ -52,6 +53,7 @@
                   </div>
                 </div>
             </div>
+			{{/if}}
             {{/each}}
         </div>
 	
