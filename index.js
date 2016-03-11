@@ -261,6 +261,10 @@ app.get('/shop', isLoggedIn,  function(request, response) {
     
 });
 
+app.post('/shop', function(req, res){
+	console.log(req.body.name);
+});
+
 app.get('/field', isLoggedIn,  function(request, response) {
     response.render('field', {layout:'fieldmaster'});
 });
