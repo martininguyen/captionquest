@@ -34,8 +34,10 @@
 				      	</div>
 				      </div>
 				      <div class="modal-footer">
-				        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				        <button type="button" id="pet{{name}}" class="btn btn-primary" onclick="buy('{{name}}', '{{price}}')">Buy</button>
+						<form action="" method="post">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>					
+							<button type="submit" id="pet{{name}}" class="btn btn-primary" name={{id}} value={{price}} onclick="buy('{{name}}', '{{price}}')">Buy</button>
+						</form>
 				      </div>
 				    </div>
 				  </div>
