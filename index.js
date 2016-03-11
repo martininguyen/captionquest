@@ -278,12 +278,6 @@ app.get('/field3', isLoggedIn,  function(request, response) {
 });
 
 app.get('/level', function(req, res) {
-  //console.log(req.query);
-  //console.log(req.user.email);
-  //console.log(req.user.username);
-  //console.log(req);
-  //console.log(req.user.email);
-  //console.log(req.user.local.email);
   res.render('level');
 });
 
@@ -398,7 +392,7 @@ app.get('/help', isLoggedIn,  function(req, res) {
   res.render('help');
 });
 app.get('/submission', function(req, res) {
-  Gallery.find({}, function(err, data) {
+  Gallery.find({}).sort({date: -1}).exec(function(err, data) {
     res.render('submission', {gallery: data});
   });
 });
